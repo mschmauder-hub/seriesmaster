@@ -23,7 +23,18 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-native": "^3.9.1",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.3.0",
     "prettier": "^2.1.1"
   },
-  "private": true
+  "private": true,
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.{js,css,md,json}": "prettier --write"
+  }
 }
