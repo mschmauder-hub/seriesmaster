@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
 import { StatusBar } from "react-native";
-import Header from "./components/Header";
+import Header from "./App/components/Header";
 
 const Container = styled.View`
   flex: 1;
