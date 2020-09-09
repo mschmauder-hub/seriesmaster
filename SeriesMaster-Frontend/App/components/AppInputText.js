@@ -6,6 +6,8 @@ const InputContainer = styled.View`
   background: #fcfcfc;
   border-radius: 25px;
   margin: 10px;
+  width: 50%;
+  align-self: center;
 `;
 
 const InputText = styled.TextInput`
@@ -19,7 +21,7 @@ const AppInputText = ({ placeholder, query, onChange }) => {
     <InputContainer>
       <InputText
         value={query}
-        onChange={() => onChange(event.target.value)}
+        onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
       />
     </InputContainer>
