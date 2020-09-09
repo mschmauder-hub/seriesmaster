@@ -14,5 +14,5 @@ const Card = ({ children }) => {
 export default Card;
 
 Card.propTypes = {
-  children: PropTypes.any,
+  children: PropTypes.node,
 };
