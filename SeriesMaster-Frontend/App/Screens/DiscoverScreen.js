@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components/native";
 import { StatusBar, View, Text } from "react-native";
 import Header from "../components/Header";
+import AppInputText from "../components/AppInputText";
 
 const Container = styled.View`
   flex: 1;
@@ -10,8 +11,7 @@ const Container = styled.View`
   padding-top: ${StatusBar.currentHeight};
 `;
 
-const StyledText = styled.Text`
-  color: red;
+const Main = styled.View`
   align-items: center;
   background: lightgrey;
   width: 100%;
@@ -19,10 +19,22 @@ const StyledText = styled.Text`
 `;
 
 const DiscoverScreen = () => {
+  const [query, setQuery] = useState("");
+
+  function handleChange(input) {
+    setQuery(input);
+  }
+
   return (
     <Container>
       <Header title="Discover"></Header>
-      <StyledText>Open up your app! Test</StyledText>
+      <Main>
+        <AppInputText
+          placeholder="Search"
+          query={query}
+          onChange={handleChange}
+        />
+      </Main>
       <View style={{ padding: 10 }}>
         <Text>Footer</Text>
       </View>
