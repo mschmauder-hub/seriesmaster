@@ -32,7 +32,7 @@ const DiscoverScreen = () => {
         <AppInputText
           placeholder="Search"
           query={query}
-          onChange={handleChange}
+          onChange={setQuery}
         />
       </Main>
       <View style={{ padding: 10 }}>
