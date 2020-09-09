@@ -27,8 +27,8 @@ const AppInputText = ({ placeholder, query, onChange }) => {
 };
 
 AppInputText.propTypes = {
-  query: PropTypes.any,
-  onChange: PropTypes.any,
+  query: PropTypes.string,
+  onChange: PropTypes.func,
   placeholder: PropTypes.string,
 };
 

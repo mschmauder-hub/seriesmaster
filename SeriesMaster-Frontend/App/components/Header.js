@@ -37,5 +37,5 @@ const Header = ({ title }) => {
 export default Header;
 
 Header.propTypes = {
-  title: PropTypes.any,
+  title: PropTypes.string,
 };
