@@ -9,8 +9,8 @@ const StyledCardImage = styled.Image`
   margin: 5px;
 `;
 
-const CardImage = ({ image }) => {
-  return <StyledCardImage source={image} />;
+const CardImage = ({ imageSrc }) => {
+  return <StyledCardImage source={imageSrc} />;
 };
 
 export default CardImage;
