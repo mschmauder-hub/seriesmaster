@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import Header from "../components/Header";
 import AppInputText from "../components/AppInputText";
 import Card from "../components/Card";
@@ -36,20 +36,14 @@ const DiscoverScreen = () => {
       <Header title="Discover"></Header>
       <Main>
         <AppInputText placeholder="Search" query={query} onChange={setQuery} />
-        <CardsContainer>
-          <Card>
-            <CardImage image={placeholderImg} />
-            <AppText cardText="Placeholder" />
-          </Card>
-          <Card>
-            <CardImage image={placeholderImg} />
-            <AppText cardText="Placeholder" />
-          </Card>
-          <Card>
-            <CardImage image={placeholderImg} />
-            <AppText cardText="Placeholder" />
-          </Card>
-        </CardsContainer>
+        <ScrollView>
+          <CardsContainer>
+            <Card>
+              <CardImage image={placeholderImg} />
+              <AppText cardText="24 Legacy" />
+            </Card>
+          </CardsContainer>
+        </ScrollView>
       </Main>
       <View style={{ padding: 10 }}>
         <Text>Footer</Text>

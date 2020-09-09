@@ -5,7 +5,8 @@ import PropTypes from "prop-types";
 const IMG = styled.Image`
   height: 125px;
   width: 125px;
-  border-radius: 20px;
+  border-radius: 25px;
+  margin: 5px;
 `;
 
 const CardImage = ({ image }) => {
