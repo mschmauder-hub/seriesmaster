@@ -21,19 +21,11 @@ const Main = styled.View`
 const DiscoverScreen = () => {
   const [query, setQuery] = useState("");
 
-  function handleChange(input) {
-    setQuery(input);
-  }
-
   return (
     <Container>
       <Header title="Discover"></Header>
       <Main>
-        <AppInputText
-          placeholder="Search"
-          query={query}
-          onChange={handleChange}
-        />
+        <AppInputText placeholder="Search" query={query} onChange={setQuery} />
       </Main>
       <View style={{ padding: 10 }}>
         <Text>Footer</Text>

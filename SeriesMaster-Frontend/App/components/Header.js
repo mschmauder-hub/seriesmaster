@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
+import menu from "../assets/menu-white.svg";
 
 const HeaderStyle = styled.View`
-  display: flex;
   flex-direction: row;
   padding: 10px;
   width: 100%;
@@ -29,7 +29,7 @@ const Header = ({ title }) => {
   return (
     <HeaderStyle>
       <StyledText>{title}</StyledText>
-      <StyledImage source={require("../assets/menu-white.svg")} />
+      <StyledImage source={menu} />
     </HeaderStyle>
   );
 };
