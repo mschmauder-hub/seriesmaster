@@ -7,13 +7,13 @@ import fonts from "../config/fonts";
 const Container = styled.TouchableOpacity`
   background: ${colors.grey};
   padding: 20px;
-  width: 50%;
+  width: 40%;
   align-items: center;
   margin: 10px;
 `;
 
 const ButtonText = styled.Text`
-  font-size: ${fonts.title};
+  font-size: ${fonts.text};
   color: ${(props) => (props.status ? colors.lightblue : colors.primary)};
 `;
 
