@@ -1,6 +1,6 @@
 import React from "react";
-import DiscoverScreen from "./App/Screens/DiscoverScreen";
+import DetailsScreen from "./App/Screens/DetailsScreen";
 
 export default function App() {
-  return <DiscoverScreen />;
+  return <DetailsScreen />;
 }
