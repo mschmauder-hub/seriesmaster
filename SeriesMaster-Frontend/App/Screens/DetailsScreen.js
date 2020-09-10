@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, Image, ScrollView } from "react-native";
-
+import { ScrollView } from "react-native";
 import Header from "../components/Header";
 import styled from "styled-components/native";
 import Tags from "../components/Tags";
@@ -9,6 +8,7 @@ import colors from "../config/colors";
 import placeholderImg from "../assets/225030.jpg";
 import ToggleButton from "../components/ToggleButton";
 import SummaryText from "../components/SummaryText";
+import TitleImage from "../components/TitleImage";
 
 const Container = styled.View`
   flex: 1;
@@ -41,8 +41,7 @@ const DetailsScreen = () => {
       <Header title="Show Title"></Header>
       <ScrollView>
         <Main>
-          <Image style={{ height: 200, width: 200 }} source={placeholderImg} />
-
+          <TitleImage imageSrc={placeholderImg} />
           <TagsContainer>
             <Tags tag="Action" color={genreColors[tag1]} />
             <Tags tag="Drama" color={genreColors[tag2]} />
@@ -63,9 +62,6 @@ const DetailsScreen = () => {
           />
         </Main>
       </ScrollView>
-      <View style={{ padding: 10 }}>
-        <Text>Footer</Text>
-      </View>
     </Container>
   );
 };
