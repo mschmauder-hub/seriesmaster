@@ -6,9 +6,9 @@ import styled from "styled-components/native";
 import Tags from "../components/Tags";
 import genreColors from "../config/genreColors";
 import colors from "../config/colors";
-import AppText from "../components/AppText";
 import placeholderImg from "../assets/225030.jpg";
 import ToggleButton from "../components/ToggleButton";
+import SummaryText from "../components/SummaryText";
 
 const Container = styled.View`
   flex: 1;
@@ -33,7 +33,8 @@ const textExample =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
 const DetailsScreen = () => {
-  const [status, setStatus] = useState(false);
+  const [completed, setCompleted] = useState(false);
+  const [onWatchList, setOnWatchList] = useState(false);
 
   return (
     <Container>
@@ -41,18 +42,25 @@ const DetailsScreen = () => {
       <ScrollView>
         <Main>
           <Image style={{ height: 200, width: 200 }} source={placeholderImg} />
+
           <TagsContainer>
             <Tags tag="Action" color={genreColors[tag1]} />
             <Tags tag="Drama" color={genreColors[tag2]} />
             <Tags tag="Thriller" color={genreColors[tag3]} />
           </TagsContainer>
-          <AppText cardText={textExample}>Test</AppText>
+
+          <SummaryText text={textExample}></SummaryText>
+
+          <ToggleButton
+            title="Watchlist"
+            status={onWatchList}
+            onPress={() => setOnWatchList(!onWatchList)}
+          />
           <ToggleButton
             title="Completed"
-            status={status}
-            onPress={() => setStatus(!status)}
+            status={completed}
+            onPress={() => setCompleted(!completed)}
           />
-          <ToggleButton title="Watchlist" />
         </Main>
       </ScrollView>
       <View style={{ padding: 10 }}>
