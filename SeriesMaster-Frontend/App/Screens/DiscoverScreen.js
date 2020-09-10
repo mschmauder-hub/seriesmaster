@@ -39,7 +39,7 @@ const DiscoverScreen = () => {
         <ScrollView>
           <CardsContainer>
             <Card>
-              <CardImage image={placeholderImg} />
+              <CardImage imageSrc={placeholderImg} />
               <AppText cardText="24 Legacy" />
             </Card>
           </CardsContainer>
