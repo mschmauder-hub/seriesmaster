@@ -1,6 +1,11 @@
 import React from "react";
-import DiscoverScreen from "./App/Screens/DiscoverScreen";
+import { NavigationContainer } from "@react-navigation/native";
+import TabNavigator from "./App/navigation/TabNavigator";
 
 export default function App() {
-  return <DiscoverScreen />;
+  return (
+    <NavigationContainer>
+      <TabNavigator />
+    </NavigationContainer>
+  );
 }
