@@ -1,6 +1,11 @@
 import React from "react";
-import DetailsScreen from "./App/Screens/DetailsScreen";
+import { NavigationContainer } from "@react-navigation/native";
+import TabNavigator from "./App/navigation/TabNavigator";
 
 export default function App() {
-  return <DetailsScreen />;
+  return (
+    <NavigationContainer>
+      <TabNavigator />
+    </NavigationContainer>
+  );
 }
