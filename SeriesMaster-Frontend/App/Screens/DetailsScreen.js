@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView } from "react-native";
 import styled from "styled-components/native";
 import Tags from "../components/Tags";
 import genreColors from "../config/genreColors";
 import colors from "../config/colors";
-import placeholderImg from "../assets/225030.jpg";
 import ToggleButton from "../components/ToggleButton";
 import SummaryText from "../components/SummaryText";
 import TitleImage from "../components/TitleImage";
 import PropTypes from "prop-types";
+import { getShows } from "../api/getShows";
 
 const Container = styled.View`
   flex: 1;
@@ -29,25 +29,33 @@ const TagsContainer = styled.View`
 const tag1 = "action";
 const tag2 = "drama";
 const tag3 = "thriller";
-const textExample =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
-const DetailsScreen = () => {
+const DetailsScreen = ({ route }) => {
   const [completed, setCompleted] = useState(false);
   const [onWatchList, setOnWatchList] = useState(false);
+  const [tvShow, setTvShow] = useState("");
+
+  useEffect(() => {
+    shows();
+  }, []);
+
+  async function shows() {
+    const show = await getShows(route.params.id);
+    setTvShow(show);
+  }
 
   return (
     <Container>
       <ScrollView>
         <Main>
-          <TitleImage imageSrc={placeholderImg} />
+          <TitleImage imageSrc={tvShow.image} />
           <TagsContainer>
             <Tags tag="Action" color={genreColors[tag1]} />
             <Tags tag="Drama" color={genreColors[tag2]} />
             <Tags tag="Thriller" color={genreColors[tag3]} />
           </TagsContainer>
 
-          <SummaryText text={textExample}></SummaryText>
+          <SummaryText text={tvShow.summary}></SummaryText>
 
           <ToggleButton
             title="Watchlist"
