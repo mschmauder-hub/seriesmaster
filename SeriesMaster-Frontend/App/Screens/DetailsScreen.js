@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { ScrollView } from "react-native";
-import Header from "../components/Header";
 import styled from "styled-components/native";
 import Tags from "../components/Tags";
 import genreColors from "../config/genreColors";
@@ -9,6 +8,7 @@ import placeholderImg from "../assets/225030.jpg";
 import ToggleButton from "../components/ToggleButton";
 import SummaryText from "../components/SummaryText";
 import TitleImage from "../components/TitleImage";
+import PropTypes from "prop-types";
 
 const Container = styled.View`
   flex: 1;
@@ -38,7 +38,6 @@ const DetailsScreen = () => {
 
   return (
     <Container>
-      <Header title="Show Title"></Header>
       <ScrollView>
         <Main>
           <TitleImage imageSrc={placeholderImg} />
@@ -67,3 +66,7 @@ const DetailsScreen = () => {
 };
 
 export default DetailsScreen;
+
+DetailsScreen.propTypes = {
+  route: PropTypes.object,
+};
