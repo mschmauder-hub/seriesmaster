@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
 import { ScrollView } from "react-native";
-import Header from "../components/Header";
 import AppInputText from "../components/AppInputText";
 import Card from "../components/Card";
 import colors from "../config/colors";
@@ -34,14 +33,13 @@ const DiscoverScreen = ({ navigation }) => {
 
   return (
     <Container>
-      <Header title="Discover"></Header>
       <Main>
         <AppInputText placeholder="Search" query={query} onChange={setQuery} />
         <ScrollView>
           <CardsContainer>
             <Card
               onPress={() =>
-                navigation.navigate("Details", { name: "24 Legacy" })
+                navigation.navigate("Details", { title: "24 Legacy" })
               }
             >
               <CardImage imageSrc={placeholderImg} />
