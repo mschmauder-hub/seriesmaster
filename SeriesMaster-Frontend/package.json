@@ -11,6 +11,7 @@
   "dependencies": {
     "expo": "~38.0.8",
     "expo-status-bar": "^1.0.2",
+    "json-server": "^0.16.1",
     "prop-types": "^15.7.2",
     "react": "~16.11.0",
     "react-dom": "~16.11.0",
