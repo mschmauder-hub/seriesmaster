@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import React from "react";
-import DiscoverScreen from "../Screens/DiscoverScreen";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { View, Text } from "react-native";
 import colors from "../config/colors";
+import StackNavigator from "./StackNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -26,11 +26,12 @@ function TabNavigator() {
         activeTintColor: colors.secondary,
         inactiveTintColor: colors.grey,
         showLabel: false,
+        style: { borderTopColor: colors.grey },
       }}
     >
       <Tab.Screen
         name="Discover"
-        component={DiscoverScreen}
+        component={StackNavigator}
         options={{
           tabBarIcon: ({ size, color }) => (
             <MaterialCommunityIcons name="magnify" size={size} color={color} />
@@ -38,7 +39,19 @@ function TabNavigator() {
         }}
       />
 
-      <Tab.Screen name="Screen2" component={DiscoverScreen2} />
+      <Tab.Screen
+        name="Screen2"
+        component={DiscoverScreen2}
+        options={{
+          tabBarIcon: ({ size, color }) => (
+            <MaterialCommunityIcons
+              name="view-list"
+              size={size}
+              color={color}
+            />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }
