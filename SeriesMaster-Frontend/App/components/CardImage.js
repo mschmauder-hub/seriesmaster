@@ -10,7 +10,7 @@ const StyledCardImage = styled.Image`
 `;
 
 const CardImage = ({ imageSrc }) => {
-  return <StyledCardImage source={imageSrc} />;
+  return <StyledCardImage source={{ uri: imageSrc }} />;
 };
 
 export default CardImage;

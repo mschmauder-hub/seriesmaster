@@ -38,7 +38,6 @@ const DiscoverScreen = ({ navigation }) => {
 
   async function shows() {
     const shows = await getShows();
-    console.log(shows);
     setTvShows(shows);
   }
 
@@ -72,5 +71,5 @@ const DiscoverScreen = ({ navigation }) => {
 export default DiscoverScreen;
 
 DiscoverScreen.propTypes = {
-  navigation: PropTypes.func,
+  navigation: PropTypes.object,
 };
