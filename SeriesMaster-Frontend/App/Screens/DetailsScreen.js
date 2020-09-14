@@ -8,7 +8,7 @@ import ToggleButton from "../components/ToggleButton";
 import SummaryText from "../components/SummaryText";
 import TitleImage from "../components/TitleImage";
 import PropTypes from "prop-types";
-import { getShows } from "../api/getShows";
+import { getShow } from "../api/getShows";
 
 const Container = styled.View`
   flex: 1;
@@ -36,11 +36,11 @@ const DetailsScreen = ({ route }) => {
   const [tvShow, setTvShow] = useState("");
 
   useEffect(() => {
-    shows();
+    fetchShows();
   }, []);
 
-  async function shows() {
-    const show = await getShows(route.params.id);
+  async function fetchShows() {
+    const show = await getShow(route.params.id);
     setTvShow(show);
   }
 
