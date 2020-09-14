@@ -36,10 +36,10 @@ const DetailsScreen = ({ route }) => {
   const [tvShow, setTvShow] = useState("");
 
   useEffect(() => {
-    fetchShows();
+    fetchShow();
   }, []);
 
-  async function fetchShows() {
+  async function fetchShow() {
     const show = await getShow(route.params.id);
     setTvShow(show);
   }

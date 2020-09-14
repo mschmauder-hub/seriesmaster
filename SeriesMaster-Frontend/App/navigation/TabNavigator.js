@@ -3,19 +3,11 @@
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { View, Text } from "react-native";
 import colors from "../config/colors";
 import StackNavigator from "./StackNavigator";
+import MyShowsScreen from "../Screens/MyShowsScreen";
 
 const Tab = createBottomTabNavigator();
-
-function DiscoverScreen2() {
-  return (
-    <View>
-      <Text>View2</Text>
-    </View>
-  );
-}
 
 function TabNavigator() {
   return (
@@ -41,7 +33,7 @@ function TabNavigator() {
 
       <Tab.Screen
         name="Screen2"
-        component={DiscoverScreen2}
+        component={MyShowsScreen}
         options={{
           tabBarIcon: ({ size, color }) => (
             <MaterialCommunityIcons
