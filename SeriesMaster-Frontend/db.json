@@ -1,0 +1,32 @@
+{
+  "shows": [
+    {
+      "id": 1,
+      "title": "24 ",
+      "summary": "<p>Jack Bauer, agent of CTU (Counter Terrorist Unit) faces threats against his country and himself in this action packed show. Each season contains of one day, each episode shows one hour of Jack Bauer's day. <b>24</b> is the only action show in real time and gained a lot of fans during the years with this concept.</p>",
+      "image": "http://static.tvmaze.com/uploads/images/medium_portrait/0/2330.jpg"
+    },
+    {
+      "id": 2,
+      "title": "24 Legacy",
+      "summary": "<p>Jack Bauer, agent of CTU (Counter Terrorist Unit) faces threats against his country and himself in this action packed show. Each season contains of one day, each episode shows one hour of Jack Bauer's day. <b>24</b> is the only action show in real time and gained a lot of fans during the years with this concept.</p>",
+      "image": "http://static.tvmaze.com/uploads/images/medium_portrait/90/225030.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Another Show",
+      "summary": "<p>Jack Bauer, agent of CTU (Counter Terrorist Unit) faces threats against his country and himself in this action packed show. Each season contains of one day, each episode shows one hour of Jack Bauer's day. <b>24</b> is the only action show in real time and gained a lot of fans during the years with this concept.</p>",
+      "image": "http://static.tvmaze.com/uploads/images/medium_portrait/90/225030.jpg"
+    },
+    {
+      "id": 4,
+      "title": "More Shows",
+      "summary": "<p>Jack Bauer, agent of CTU (Counter Terrorist Unit) faces threats against his country and himself in this action packed show. Each season contains of one day, each episode shows one hour of Jack Bauer's day. <b>24</b> is the only action show in real time and gained a lot of fans during the years with this concept.</p>",
+      "image": "http://static.tvmaze.com/uploads/images/medium_portrait/90/225030.jpg"
+    }
+  ],
+  "users": [
+    { "id": 1, "completed": [{ "movieId": 1 }] },
+    { "id": 2, "completed": [{ "movieId": 1 }] }
+  ]
+}

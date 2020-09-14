@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import { ScrollView } from "react-native";
 import AppInputText from "../components/AppInputText";
@@ -6,8 +6,8 @@ import Card from "../components/Card";
 import colors from "../config/colors";
 import AppText from "../components/AppText";
 import CardImage from "../components/CardImage";
-import placeholderImg from "../assets/225030.jpg";
 import PropTypes from "prop-types";
+import { getShows } from "../api/getShows";
 
 const Container = styled.View`
   flex: 1;
@@ -30,6 +30,16 @@ const CardsContainer = styled.View`
 
 const DiscoverScreen = ({ navigation }) => {
   const [query, setQuery] = useState("");
+  const [tvShows, setTvShows] = useState([]);
+
+  useEffect(() => {
+    shows();
+  }, []);
+
+  async function shows() {
+    const shows = await getShows();
+    setTvShows(shows);
+  }
 
   return (
     <Container>
@@ -37,14 +47,20 @@ const DiscoverScreen = ({ navigation }) => {
         <AppInputText placeholder="Search" query={query} onChange={setQuery} />
         <ScrollView>
           <CardsContainer>
-            <Card
-              onPress={() =>
-                navigation.navigate("Details", { title: "24 Legacy" })
-              }
-            >
-              <CardImage imageSrc={placeholderImg} />
-              <AppText cardText="24 Legacy" />
-            </Card>
+            {tvShows?.map((tvShow) => (
+              <Card
+                key={tvShow.id}
+                onPress={() =>
+                  navigation.navigate("Details", {
+                    title: tvShow.title,
+                    id: tvShow.id,
+                  })
+                }
+              >
+                <CardImage imageSrc={tvShow.image} />
+                <AppText cardText={tvShow.title} />
+              </Card>
+            ))}
           </CardsContainer>
         </ScrollView>
       </Main>
@@ -55,5 +71,5 @@ const DiscoverScreen = ({ navigation }) => {
 export default DiscoverScreen;
 
 DiscoverScreen.propTypes = {
-  navigation: PropTypes.func,
+  navigation: PropTypes.object,
 };

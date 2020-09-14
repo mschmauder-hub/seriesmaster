@@ -9,7 +9,7 @@ const Image = styled.Image`
 `;
 
 const TitleImage = ({ imageSrc }) => {
-  return <Image source={imageSrc} />;
+  return <Image source={{ uri: imageSrc }} />;
 };
 
 export default TitleImage;

@@ -4,7 +4,6 @@ import DiscoverScreen from "../Screens/DiscoverScreen";
 import DetailsScreen from "../Screens/DetailsScreen";
 import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import fonts from "../config/fonts";
 
 const Stack = createStackNavigator();
 
@@ -23,7 +22,7 @@ function StackNavigator() {
           <MaterialCommunityIcons
             name="menu"
             color={colors.primary}
-            size={fonts.title}
+            size={22}
             style={{ marginRight: 10 }}
           />
         ),
