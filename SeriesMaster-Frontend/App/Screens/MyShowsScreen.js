@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
-import List from "../components/List";
-import ListItem from "../components/ListItem";
-import ListItemImage from "../components/ListItemImage";
-import ListItemText from "../components/ListItemText";
 import Tab from "../components/Tab";
 import colors from "../config/colors";
 import PropTypes from "prop-types";
-import imageSrc from "../assets/225030.jpg";
+import Watchlist from "../components/Watchlist";
+import CompletedList from "../components/CompletedList";
 
 const Container = styled.View`
   flex: 1;
@@ -37,35 +34,27 @@ const MyShowsScreen = ({ navigation }) => {
           isActive={activeTab === "completed"}
         />
       </StyledView>
-      {activeTab === "watchlist" && (
-        <List>
-          <ListItem
-            onPress={() =>
-              navigation.navigate("Details", {
-                title: "24 Legacy",
-                id: 2,
-              })
-            }
-          >
-            <ListItemImage imageSrc={imageSrc} />
-            <ListItemText title="24 Legacy" />
-          </ListItem>
-        </List>
-      )}
+
       {activeTab === "completed" && (
-        <List>
-          <ListItem
-            onPress={() =>
-              navigation.navigate("Details", {
-                title: "24 Legacy",
-                id: 2,
-              })
-            }
-          >
-            <ListItemImage imageSrc={imageSrc} />
-            <ListItemText title="24" />
-          </ListItem>
-        </List>
+        <CompletedList
+          onPress={() =>
+            navigation.navigate("Details", {
+              title: "24 ",
+              id: 2,
+            })
+          }
+        />
+      )}
+
+      {activeTab === "watchlist" && (
+        <Watchlist
+          onPress={() =>
+            navigation.navigate("Details", {
+              title: "24 ",
+              id: 2,
+            })
+          }
+        />
       )}
     </Container>
   );
