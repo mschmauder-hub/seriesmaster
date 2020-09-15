@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { Text } from "react-native";
-
 import styled from "styled-components/native";
 import Header from "../components/Header";
+import List from "../components/List";
+import ListItem from "../components/ListItem";
+import ListItemImage from "../components/ListItemImage";
+import ListItemText from "../components/ListItemText";
 import Tab from "../components/Tab";
 import colors from "../config/colors";
+import imageSrc from "../assets/225030.jpg";
 
 const Container = styled.View`
   flex: 1;
@@ -14,6 +17,7 @@ const Container = styled.View`
 
 const StyledView = styled.View`
   flex-direction: row;
+  width: 100%;
 `;
 
 const MyShowsScreen = () => {
@@ -32,19 +36,33 @@ const MyShowsScreen = () => {
   return (
     <Container>
       <Header title="MyShows" />
-      <StyledView style={{ width: 400 }}>
+      <StyledView>
         <Tab
           title="Watchlist"
           onPress={handleSetWatchlist}
           isActive={watchlistIsActive}
         />
-        <Tab title="Completed" onPress={handleSetCompleted} />
+        <Tab
+          title="Completed"
+          onPress={handleSetCompleted}
+          isActive={completedIsActive}
+        />
       </StyledView>
       {watchlistIsActive && (
-        <Text style={{ color: colors.primary }}>Watchlist</Text>
+        <List>
+          <ListItem>
+            <ListItemImage imageSrc={imageSrc} />
+            <ListItemText title="24 Legacy" />
+          </ListItem>
+        </List>
       )}
       {completedIsActive && (
-        <Text style={{ color: colors.primary }}>Completed</Text>
+        <List>
+          <ListItem>
+            <ListItemImage imageSrc={imageSrc} />
+            <ListItemText title="24" />
+          </ListItem>
+        </List>
       )}
     </Container>
   );

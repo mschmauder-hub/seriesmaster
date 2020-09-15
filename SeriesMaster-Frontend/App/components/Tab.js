@@ -6,24 +6,24 @@ import PropTypes from "prop-types";
 
 const StyledView = styled.View`
   border-width: 1px;
-  border-color: ${colors.secondary};
+  border-color: ${(props) => (props.isActive ? colors.secondary : colors.grey)};
   border-bottom-color: ${colors.dark};
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   flex: 1;
-  margin: 5px;
   align-items: center;
+  margin-top: 10px;
 `;
 
 const StyledText = styled.Text`
-  color: ${colors.primary};
+  color: ${(props) => (props.isActive ? colors.primary : colors.grey)};
 `;
 
-const Tab = ({ onPress, title }) => {
+const Tab = ({ onPress, title, isActive }) => {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
-      <StyledView>
-        <StyledText>{title}</StyledText>
+      <StyledView isActive={isActive}>
+        <StyledText isActive={isActive}>{title}</StyledText>
       </StyledView>
     </TouchableWithoutFeedback>
   );
@@ -34,4 +34,5 @@ export default Tab;
 Tab.propTypes = {
   onPress: PropTypes.func,
   title: PropTypes.string,
+  isActive: PropTypes.bool,
 };
