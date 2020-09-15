@@ -1,13 +1,13 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import DiscoverScreen from "../Screens/DiscoverScreen";
-import DetailsScreen from "../Screens/DetailsScreen";
-import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import colors from "../config/colors";
+import DetailsScreen from "../Screens/DetailsScreen";
+import MyShowsScreen from "../Screens/MyShowsScreen";
 
 const Stack = createStackNavigator();
 
-function StackNavigator() {
+function MyShowsStack() {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -28,7 +28,7 @@ function StackNavigator() {
         ),
       }}
     >
-      <Stack.Screen name="Discover" component={DiscoverScreen} />
+      <Stack.Screen name="MyShows" component={MyShowsScreen} />
       <Stack.Screen
         name="Details"
         component={DetailsScreen}
@@ -38,4 +38,4 @@ function StackNavigator() {
   );
 }
 
-export default StackNavigator;
+export default MyShowsStack;
