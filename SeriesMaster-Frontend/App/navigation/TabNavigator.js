@@ -4,8 +4,8 @@ import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import colors from "../config/colors";
-import StackNavigator from "./StackNavigator";
-import MyShowsScreen from "../Screens/MyShowsScreen";
+import DiscoverStack from "./DiscoverStack";
+import MyShowsStack from "./MyShowsStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -23,7 +23,7 @@ function TabNavigator() {
     >
       <Tab.Screen
         name="Discover"
-        component={StackNavigator}
+        component={DiscoverStack}
         options={{
           tabBarIcon: ({ size, color }) => (
             <MaterialCommunityIcons name="magnify" size={size} color={color} />
@@ -32,8 +32,8 @@ function TabNavigator() {
       />
 
       <Tab.Screen
-        name="Screen2"
-        component={MyShowsScreen}
+        name="MyShows"
+        component={MyShowsStack}
         options={{
           tabBarIcon: ({ size, color }) => (
             <MaterialCommunityIcons

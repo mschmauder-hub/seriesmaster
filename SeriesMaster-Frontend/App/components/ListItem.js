@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import colors from "../config/colors";
 
-const StyledListItem = styled.View`
+const StyledListItem = styled.TouchableOpacity`
   flex-direction: row;
   border-color: ${colors.dark};
   border-bottom-color: ${colors.grey};
@@ -11,12 +11,13 @@ const StyledListItem = styled.View`
   border-width: 1px;
 `;
 
-const ListItem = ({ children }) => {
-  return <StyledListItem>{children}</StyledListItem>;
+const ListItem = ({ onPress, children }) => {
+  return <StyledListItem onPress={onPress}>{children}</StyledListItem>;
 };
 
 export default ListItem;
 
 ListItem.propTypes = {
   children: PropTypes.any,
+  onPress: PropTypes.func,
 };

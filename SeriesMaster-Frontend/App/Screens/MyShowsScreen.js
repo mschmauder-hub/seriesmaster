@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
-import Header from "../components/Header";
 import List from "../components/List";
 import ListItem from "../components/ListItem";
 import ListItemImage from "../components/ListItemImage";
 import ListItemText from "../components/ListItemText";
 import Tab from "../components/Tab";
 import colors from "../config/colors";
+import PropTypes from "prop-types";
 import imageSrc from "../assets/225030.jpg";
 
 const Container = styled.View`
@@ -20,7 +20,7 @@ const StyledView = styled.View`
   width: 100%;
 `;
 
-const MyShowsScreen = () => {
+const MyShowsScreen = ({ navigation }) => {
   const [watchlistIsActive, setWatchlistIsActive] = useState(false);
   const [completedIsActive, setCompletedIsActive] = useState(true);
 
@@ -35,7 +35,6 @@ const MyShowsScreen = () => {
 
   return (
     <Container>
-      <Header title="MyShows" />
       <StyledView>
         <Tab
           title="Watchlist"
@@ -50,7 +49,14 @@ const MyShowsScreen = () => {
       </StyledView>
       {watchlistIsActive && (
         <List>
-          <ListItem>
+          <ListItem
+            onPress={() =>
+              navigation.navigate("Details", {
+                title: "24 Legacy",
+                id: 2,
+              })
+            }
+          >
             <ListItemImage imageSrc={imageSrc} />
             <ListItemText title="24 Legacy" />
           </ListItem>
@@ -58,7 +64,14 @@ const MyShowsScreen = () => {
       )}
       {completedIsActive && (
         <List>
-          <ListItem>
+          <ListItem
+            onPress={() =>
+              navigation.navigate("Details", {
+                title: "24 Legacy",
+                id: 2,
+              })
+            }
+          >
             <ListItemImage imageSrc={imageSrc} />
             <ListItemText title="24" />
           </ListItem>
@@ -69,3 +82,7 @@ const MyShowsScreen = () => {
 };
 
 export default MyShowsScreen;
+
+MyShowsScreen.propTypes = {
+  navigation: PropTypes.object,
+};
