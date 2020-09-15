@@ -21,33 +21,23 @@ const StyledView = styled.View`
 `;
 
 const MyShowsScreen = ({ navigation }) => {
-  const [watchlistIsActive, setWatchlistIsActive] = useState(false);
-  const [completedIsActive, setCompletedIsActive] = useState(true);
-
-  function handleSetWatchlist() {
-    setWatchlistIsActive(true);
-    setCompletedIsActive(false);
-  }
-  function handleSetCompleted() {
-    setWatchlistIsActive(false);
-    setCompletedIsActive(true);
-  }
+  const [activeTab, setActiveTab] = useState("watchlist");
 
   return (
     <Container>
       <StyledView>
         <Tab
           title="Watchlist"
-          onPress={handleSetWatchlist}
-          isActive={watchlistIsActive}
+          onPress={() => setActiveTab("watchlist")}
+          isActive={activeTab === "watchlist"}
         />
         <Tab
           title="Completed"
-          onPress={handleSetCompleted}
-          isActive={completedIsActive}
+          onPress={() => setActiveTab("completed")}
+          isActive={activeTab === "completed"}
         />
       </StyledView>
-      {watchlistIsActive && (
+      {activeTab === "watchlist" && (
         <List>
           <ListItem
             onPress={() =>
@@ -62,7 +52,7 @@ const MyShowsScreen = ({ navigation }) => {
           </ListItem>
         </List>
       )}
-      {completedIsActive && (
+      {activeTab === "completed" && (
         <List>
           <ListItem
             onPress={() =>
