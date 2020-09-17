@@ -1,9 +1,9 @@
 const fetch = require("node-fetch");
 
-async function searchShow(title) {
+async function searchShows(query) {
   try {
     const response = await fetch(
-      `http://api.tvmaze.com/search/shows?q=${title}`
+      `http://api.tvmaze.com/search/shows?q=${query}`
     );
     const data = await response.json();
 
@@ -25,4 +25,22 @@ async function searchShow(title) {
     console.log(error);
   }
 }
-exports.searchShow = searchShow;
+async function searchSingleShow(query) {
+  try {
+    const response = await fetch(`http://api.tvmaze.com/shows/${query}`);
+    const data = await response.json();
+
+    const tvShow = {
+      genre: data.genres,
+      id: data.id,
+      title: data.name,
+      imgSrc: data.image.medium,
+    };
+
+    return tvShow;
+  } catch (error) {
+    console.log(error);
+  }
+}
+exports.searchShows = searchShows;
+exports.searchSingleShow = searchSingleShow;

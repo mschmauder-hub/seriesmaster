@@ -1,14 +1,21 @@
 const express = require("express");
-const { searchShow } = require("../api/getShows");
+const { searchShows, searchSingleShow } = require("../api/getShows");
 
 function createShowsRouter() {
   const router = express.Router();
 
   router.get("/?q=:query", async (req, res) => {
     const query = req.params.query;
-    const shows = await searchShow(query);
+    const shows = await searchShows(query);
 
     res.send(shows);
+  });
+
+  router.get("/:id", async (req, res) => {
+    const id = req.params.id;
+    const show = await searchSingleShow(id);
+
+    res.send(show);
   });
 
   return router;
