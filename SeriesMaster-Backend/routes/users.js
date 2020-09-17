@@ -8,7 +8,7 @@ function createUserRouter(database) {
     const user = await collection.findOne({
       user: "data",
     });
-    console.log(user);
+
     res.send(user);
   });
 
