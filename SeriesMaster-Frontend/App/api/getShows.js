@@ -1,11 +1,15 @@
 export async function getShows(query) {
-  const response = await fetch(
-    `https://seriesmaster2020.herokuapp.com/api/shows/q=${query}`
-  );
+  try {
+    const response = await fetch(
+      `https://seriesmaster2020.herokuapp.com/api/shows/q=${query}`
+    );
 
-  const data = response.text();
+    const data = await response.json();
 
-  return data;
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 }
 export async function getShow(id) {
   const response = await fetch(

@@ -21,7 +21,7 @@ const AppInputText = ({ placeholder, query, onChange }) => {
     <InputContainer>
       <InputText
         value={query}
-        onChange={(event) => onChange(event.target.value)}
+        onChangeText={onChange}
         placeholder={placeholder}
       />
     </InputContainer>

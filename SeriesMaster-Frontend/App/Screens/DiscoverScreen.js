@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import { ScrollView } from "react-native";
 import AppInputText from "../components/AppInputText";
@@ -34,20 +34,18 @@ const DiscoverScreen = ({ navigation }) => {
   const [tvShows, setTvShows] = useState([]);
   const debouncedQuery = useDebounce(query, 500);
 
-  async function handleChange(input) {
-    setQuery(input);
-    const shows = await getShows(debouncedQuery);
-    setTvShows(shows);
-  }
+  useEffect(() => {
+    async function fetchShows() {
+      const shows = await getShows(debouncedQuery);
+      setTvShows(shows);
+    }
+    fetchShows();
+  }, [debouncedQuery]);
 
   return (
     <Container>
       <Main>
-        <AppInputText
-          placeholder="Search"
-          query={query}
-          onChange={handleChange}
-        />
+        <AppInputText placeholder="Search" query={query} onChange={setQuery} />
         <ScrollView>
           <CardsContainer>
             {tvShows?.map((tvShow) => (
