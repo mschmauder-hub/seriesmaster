@@ -9,7 +9,7 @@ function createShowsRouter() {
       const query = req.params.query;
       const shows = await searchShows(query);
 
-      res.send(shows);
+      res.json(shows);
     } catch (error) {
       response.status(500).send(error.message);
     }
@@ -20,7 +20,7 @@ function createShowsRouter() {
       const id = req.params.id;
       const show = await searchSingleShow(id);
 
-      res.send(show);
+      res.json(show);
     } catch (error) {
       response.status(500).send(error.message);
     }
