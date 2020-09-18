@@ -4,7 +4,7 @@ const createShowsRouter = require("./routes/shows");
 const createUserRouter = require("./routes/users");
 const app = express();
 const { MongoClient } = require("mongodb");
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 const client = new MongoClient(process.env.MONGO_URI, {
   useUnifiedTopology: true,

@@ -1,10 +1,29 @@
 const express = require("express");
+const { searchShows, searchSingleShow } = require("../api/getShows");
 
 function createShowsRouter() {
   const router = express.Router();
 
-  router.get("/", async (req, res) => {
-    res.send("Send Shows");
+  router.get("/?q=:query", async (req, res) => {
+    try {
+      const query = req.params.query;
+      const shows = await searchShows(query);
+
+      res.send(shows);
+    } catch (error) {
+      response.status(500).send(error.message);
+    }
+  });
+
+  router.get("/:id", async (req, res) => {
+    try {
+      const id = req.params.id;
+      const show = await searchSingleShow(id);
+
+      res.send(show);
+    } catch (error) {
+      response.status(500).send(error.message);
+    }
   });
 
   return router;
