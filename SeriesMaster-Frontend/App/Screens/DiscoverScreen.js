@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components/native";
 import { ScrollView } from "react-native";
 import AppInputText from "../components/AppInputText";
@@ -8,6 +8,7 @@ import AppText from "../components/AppText";
 import CardImage from "../components/CardImage";
 import PropTypes from "prop-types";
 import { getShows } from "../api/getShows";
+import useDebounce from "../hooks/useDebounce";
 
 const Container = styled.View`
   flex: 1;
@@ -31,20 +32,22 @@ const CardsContainer = styled.View`
 const DiscoverScreen = ({ navigation }) => {
   const [query, setQuery] = useState("");
   const [tvShows, setTvShows] = useState([]);
+  const debouncedQuery = useDebounce(query, 500);
 
-  useEffect(() => {
-    shows();
-  }, []);
-
-  async function shows() {
-    const shows = await getShows();
+  async function handleChange(input) {
+    setQuery(input);
+    const shows = await getShows(debouncedQuery);
     setTvShows(shows);
   }
 
   return (
     <Container>
       <Main>
-        <AppInputText placeholder="Search" query={query} onChange={setQuery} />
+        <AppInputText
+          placeholder="Search"
+          query={query}
+          onChange={handleChange}
+        />
         <ScrollView>
           <CardsContainer>
             {tvShows?.map((tvShow) => (
@@ -57,7 +60,7 @@ const DiscoverScreen = ({ navigation }) => {
                   })
                 }
               >
-                <CardImage imageSrc={tvShow.image} />
+                <CardImage imageSrc={tvShow.imgSrc} />
                 <AppText cardText={tvShow.title} />
               </Card>
             ))}
