@@ -5,6 +5,10 @@ async function searchShows(query) {
     const response = await fetch(
       `http://api.tvmaze.com/search/shows?q=${query}`
     );
+
+    if (!response.ok) {
+      throw new Error(response);
+    }
     const data = await response.json();
 
     const filteredShows = data.filter((data) => {
@@ -28,6 +32,11 @@ async function searchShows(query) {
 async function searchSingleShow(query) {
   try {
     const response = await fetch(`http://api.tvmaze.com/shows/${query}`);
+
+    if (!response.ok) {
+      throw new Error(response);
+    }
+
     const data = await response.json();
 
     const tvShow = {

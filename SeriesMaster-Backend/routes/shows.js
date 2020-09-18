@@ -5,17 +5,25 @@ function createShowsRouter() {
   const router = express.Router();
 
   router.get("/?q=:query", async (req, res) => {
-    const query = req.params.query;
-    const shows = await searchShows(query);
+    try {
+      const query = req.params.query;
+      const shows = await searchShows(query);
 
-    res.send(shows);
+      res.send(shows);
+    } catch (error) {
+      response.status(500).send(error.message);
+    }
   });
 
   router.get("/:id", async (req, res) => {
-    const id = req.params.id;
-    const show = await searchSingleShow(id);
+    try {
+      const id = req.params.id;
+      const show = await searchSingleShow(id);
 
-    res.send(show);
+      res.send(show);
+    } catch (error) {
+      response.status(500).send(error.message);
+    }
   });
 
   return router;
