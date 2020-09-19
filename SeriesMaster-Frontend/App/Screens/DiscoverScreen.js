@@ -8,6 +8,7 @@ import AppText from "../components/AppText";
 import CardImage from "../components/CardImage";
 import PropTypes from "prop-types";
 import { getShows } from "../api/getShows";
+import useDebounce from "../hooks/useDebounce";
 
 const Container = styled.View`
   flex: 1;
@@ -31,15 +32,15 @@ const CardsContainer = styled.View`
 const DiscoverScreen = ({ navigation }) => {
   const [query, setQuery] = useState("");
   const [tvShows, setTvShows] = useState([]);
+  const debouncedQuery = useDebounce(query, 500);
 
   useEffect(() => {
-    shows();
-  }, []);
-
-  async function shows() {
-    const shows = await getShows();
-    setTvShows(shows);
-  }
+    async function fetchShows() {
+      const shows = await getShows(debouncedQuery);
+      setTvShows(shows);
+    }
+    fetchShows();
+  }, [debouncedQuery]);
 
   return (
     <Container>
@@ -57,7 +58,7 @@ const DiscoverScreen = ({ navigation }) => {
                   })
                 }
               >
-                <CardImage imageSrc={tvShow.image} />
+                <CardImage imageSrc={tvShow.imgSrc} />
                 <AppText cardText={tvShow.title} />
               </Card>
             ))}

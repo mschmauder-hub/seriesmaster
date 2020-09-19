@@ -1,19 +1,20 @@
-export async function getShows() {
-  let response;
+export async function getShows(query) {
+  try {
+    const response = await fetch(
+      `https://seriesmaster2020.herokuapp.com/api/shows/q=${query}`
+    );
 
-  response = await fetch("http://localhost:3000/shows");
+    const data = await response.json();
 
-  const data = await response.json();
-
-  return data;
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 }
 export async function getShow(id) {
-  let response;
-
-  // response = await fetch(`http://192.168.178.44:3000/shows/${id}`);
-
-  // only for expo web testing
-  response = await fetch(`http://localhost:3000/shows/${id}`);
+  const response = await fetch(
+    `https://seriesmaster2020.herokuapp.com/api/shows/${id}`
+  );
 
   const data = await response.json();
 
