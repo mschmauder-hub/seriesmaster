@@ -15,7 +15,4 @@ async function findShows(database, showsId) {
 
   return shows;
 }
-
-exports.postShow = postShow;
-exports.findShow = findShow;
-exports.findShows = findShows;
+module.exports = { postShow, findShow, findShows };
