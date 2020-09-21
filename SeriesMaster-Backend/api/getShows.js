@@ -41,9 +41,10 @@ async function searchSingleShow(query) {
 
     const tvShow = {
       genre: data.genres,
-      id: data.id,
+      id: data.id.toString(),
       title: data.name,
       imgSrc: data.image.medium,
+      summary: data.summary.replace(/(<([^>]+)>)/gi, ""),
     };
 
     return tvShow;
