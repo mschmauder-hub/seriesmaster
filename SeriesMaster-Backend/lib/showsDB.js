@@ -9,6 +9,13 @@ async function findShow(database, showId) {
 
   return show;
 }
+async function findShows(database, showsId) {
+  const collection = database.collection("shows");
+  const shows = await collection.find({ id: { $in: showsId } }).toArray();
+
+  return shows;
+}
 
 exports.postShow = postShow;
 exports.findShow = findShow;
+exports.findShows = findShows;
