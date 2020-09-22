@@ -5,7 +5,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../config/colors";
 
 const InputContainer = styled.View`
-  background: #fcfcfc;
+  background: ${colors.primary};
   border-radius: 25px;
   margin: 5px;
   width: 70%;
@@ -15,7 +15,7 @@ const InputContainer = styled.View`
 `;
 
 const InputText = styled.TextInput`
-  color: #20232a;
+  color: ${colors.dark};
   padding: 10px;
   margin-left: 5px;
 `;
