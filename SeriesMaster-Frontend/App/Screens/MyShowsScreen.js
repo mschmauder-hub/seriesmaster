@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import Tab from "../components/Tab";
 import colors from "../config/colors";
 import PropTypes from "prop-types";
 import Watchlist from "../components/Watchlist";
 import CompletedList from "../components/CompletedList";
+import { getMyShows } from "../api/getMyShows";
 
 const Container = styled.View`
   flex: 1;
@@ -19,6 +20,20 @@ const StyledView = styled.View`
 
 const MyShowsScreen = ({ navigation }) => {
   const [activeTab, setActiveTab] = useState("watchlist");
+  const [watchlist, setWatchlist] = useState([]);
+  const [completed, setCompleted] = useState([]);
+
+  useEffect(() => {
+    async function fetchMyShows() {
+      const shows = await getMyShows(activeTab);
+      if (activeTab === "watchlist") {
+        setWatchlist(shows);
+        return;
+      }
+      setCompleted(shows);
+    }
+    fetchMyShows();
+  }, [activeTab]);
 
   return (
     <Container>
@@ -35,27 +50,32 @@ const MyShowsScreen = ({ navigation }) => {
         />
       </StyledView>
 
-      {activeTab === "completed" && (
-        <CompletedList
-          onPress={() =>
-            navigation.navigate("Details", {
-              title: "24 ",
-              id: 2,
-            })
-          }
-        />
-      )}
-
-      {activeTab === "watchlist" && (
-        <Watchlist
-          onPress={() =>
-            navigation.navigate("Details", {
-              title: "24 ",
-              id: 2,
-            })
-          }
-        />
-      )}
+      {activeTab === "completed" &&
+        completed?.map((show) => (
+          <CompletedList
+            key={show.id}
+            show={show}
+            onPress={() =>
+              navigation.navigate("Details", {
+                title: show.title,
+                id: show.id,
+              })
+            }
+          />
+        ))}
+      {activeTab === "watchlist" &&
+        watchlist?.map((show) => (
+          <Watchlist
+            key={show.id}
+            show={show}
+            onPress={() =>
+              navigation.navigate("Details", {
+                title: show.title,
+                id: show.id,
+              })
+            }
+          />
+        ))}
     </Container>
   );
 };
