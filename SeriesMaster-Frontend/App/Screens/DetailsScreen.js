@@ -9,6 +9,7 @@ import SummaryText from "../components/SummaryText";
 import TitleImage from "../components/TitleImage";
 import PropTypes from "prop-types";
 import { getShow } from "../api/getShows";
+import { postMyList } from "../api/getMyShows";
 
 const Container = styled.View`
   flex: 1;
@@ -40,6 +41,13 @@ const DetailsScreen = ({ route }) => {
     fetchShow();
   }, [route.params.id]);
 
+  async function handleOnPress(list) {
+    await postMyList(list, route.params.id);
+    list === "watchlist"
+      ? setOnWatchList(!onWatchList)
+      : setCompleted(!completed);
+  }
+
   return (
     <Container>
       <ScrollView>
@@ -56,12 +64,12 @@ const DetailsScreen = ({ route }) => {
           <ToggleButton
             title="Watchlist"
             status={onWatchList}
-            onPress={() => setOnWatchList(!onWatchList)}
+            onPress={() => handleOnPress("watchlist")}
           />
           <ToggleButton
             title="Completed"
             status={completed}
-            onPress={() => setCompleted(!completed)}
+            onPress={() => handleOnPress("completed")}
           />
         </Main>
       </ScrollView>
