@@ -1,7 +1,8 @@
 const express = require("express");
 const { searchShows, searchSingleShow } = require("../api/getShows");
+const { postShow, findShow } = require("../lib/showsDB");
 
-function createShowsRouter() {
+function createShowsRouter(database) {
   const router = express.Router();
 
   router.get("/?q=:query", async (req, res) => {
@@ -18,7 +19,13 @@ function createShowsRouter() {
   router.get("/:id", async (req, res) => {
     try {
       const id = req.params.id;
-      const show = await searchSingleShow(id);
+      let show;
+      show = await findShow(database, id);
+
+      if (!show) {
+        show = await searchSingleShow(id);
+        postShow(database, show);
+      }
 
       res.json(show);
     } catch (error) {
