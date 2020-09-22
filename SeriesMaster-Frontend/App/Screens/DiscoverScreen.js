@@ -45,7 +45,7 @@ const DiscoverScreen = ({ navigation }) => {
   return (
     <Container>
       <Main>
-        <AppInputText placeholder="Search" query={query} onChange={setQuery} />
+        <AppInputText placeholder="Search" input={query} onChange={setQuery} />
         <ScrollView>
           <CardsContainer>
             {tvShows?.map((tvShow) => (
