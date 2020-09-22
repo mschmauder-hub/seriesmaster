@@ -25,7 +25,14 @@ const Icon = styled(MaterialCommunityIcons)`
   color: ${colors.grey};
 `;
 
-const AppInputText = ({ icon, iconSize, placeholder, input, onChange }) => {
+const AppInputText = ({
+  icon,
+  iconSize,
+  placeholder,
+  input,
+  onChange,
+  ...otherProps
+}) => {
   return (
     <InputContainer>
       {icon && <Icon name={icon} size={iconSize} />}
@@ -33,6 +40,7 @@ const AppInputText = ({ icon, iconSize, placeholder, input, onChange }) => {
         value={input}
         onChangeText={onChange}
         placeholder={placeholder}
+        {...otherProps}
       />
     </InputContainer>
   );

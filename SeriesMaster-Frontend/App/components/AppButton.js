@@ -10,6 +10,7 @@ const ButtonContainer = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   border-radius: 25px;
+  margin: 10px;
   background-color: ${colors.secondary};
 `;
 
