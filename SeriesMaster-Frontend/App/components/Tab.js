@@ -5,7 +5,7 @@ import colors from "../config/colors";
 import PropTypes from "prop-types";
 
 const StyledView = styled.View`
-  border-width: 1px;
+  border-width: 2px;
   border-color: ${(props) => (props.isActive ? colors.secondary : colors.grey)};
   border-bottom-color: ${colors.dark};
   border-top-left-radius: 20px;

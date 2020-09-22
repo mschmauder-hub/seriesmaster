@@ -3,15 +3,14 @@ import List from "./List";
 import ListItem from "./ListItem";
 import ListItemImage from "./ListItemImage";
 import ListItemText from "./ListItemText";
-import imageSrc from "../assets/225030.jpg";
 import PropTypes from "prop-types";
 
-const Watchlist = ({ onPress }) => {
+const Watchlist = ({ onPress, show }) => {
   return (
     <List>
       <ListItem onPress={onPress}>
-        <ListItemImage imageSrc={imageSrc} />
-        <ListItemText title="24" />
+        <ListItemImage imageSrc={show.imgSrc} />
+        <ListItemText title={show.title} />
       </ListItem>
     </List>
   );
@@ -21,4 +20,5 @@ export default Watchlist;
 
 Watchlist.propTypes = {
   onPress: PropTypes.func,
+  show: PropTypes.object,
 };
