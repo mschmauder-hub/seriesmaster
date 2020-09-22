@@ -9,6 +9,7 @@ import SummaryText from "../components/SummaryText";
 import TitleImage from "../components/TitleImage";
 import PropTypes from "prop-types";
 import { getShow } from "../api/getShows";
+import { postMyList } from "../api/getMyShows";
 
 const Container = styled.View`
   flex: 1;
@@ -26,14 +27,11 @@ const Main = styled.View`
 const TagsContainer = styled.View`
   flex-direction: row;
 `;
-const tag1 = "action";
-const tag2 = "drama";
-const tag3 = "thriller";
 
 const DetailsScreen = ({ route }) => {
   const [completed, setCompleted] = useState(false);
   const [onWatchList, setOnWatchList] = useState(false);
-  const [tvShow, setTvShow] = useState("");
+  const [tvShow, setTvShow] = useState([]);
 
   useEffect(() => {
     async function fetchShow() {
@@ -43,15 +41,22 @@ const DetailsScreen = ({ route }) => {
     fetchShow();
   }, [route.params.id]);
 
+  async function handleOnPress(list) {
+    await postMyList(list, route.params.id);
+    list === "watchlist"
+      ? setOnWatchList(!onWatchList)
+      : setCompleted(!completed);
+  }
+
   return (
     <Container>
       <ScrollView>
         <Main>
-          <TitleImage imageSrc={tvShow.image} />
+          <TitleImage imageSrc={tvShow.imgSrc} />
           <TagsContainer>
-            <Tags tag="Action" color={genreColors[tag1]} />
-            <Tags tag="Drama" color={genreColors[tag2]} />
-            <Tags tag="Thriller" color={genreColors[tag3]} />
+            {tvShow.genre?.map((genre) => (
+              <Tags key={genre} tag={genre} color={genreColors[genre]} />
+            ))}
           </TagsContainer>
 
           <SummaryText text={tvShow.summary}></SummaryText>
@@ -59,12 +64,12 @@ const DetailsScreen = ({ route }) => {
           <ToggleButton
             title="Watchlist"
             status={onWatchList}
-            onPress={() => setOnWatchList(!onWatchList)}
+            onPress={() => handleOnPress("watchlist")}
           />
           <ToggleButton
             title="Completed"
             status={completed}
-            onPress={() => setCompleted(!completed)}
+            onPress={() => handleOnPress("completed")}
           />
         </Main>
       </ScrollView>
