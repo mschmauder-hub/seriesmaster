@@ -22,7 +22,7 @@ function createUserRouter(database) {
         userId: id,
       });
       const shows = await findShows(database, user[list]);
-      res.send(shows);
+      res.json(shows);
     } catch (error) {
       response.status(500).send(error.message);
     }
