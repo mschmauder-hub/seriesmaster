@@ -1,7 +1,7 @@
 export async function getMyShows(list) {
   try {
     const response = await fetch(
-      `https://seriesmaster2020.herokuapp.com/api/user/1/${list}`
+      `https://seriesmaster2020.herokuapp.com/api/users/1/${list}`
     );
 
     const data = await response.json();
@@ -15,7 +15,7 @@ export async function getMyShows(list) {
 export async function postMyList(list, id) {
   try {
     await fetch(
-      `https://seriesmaster2020.herokuapp.com/api/user/1/${list}/${id}`,
+      `https://seriesmaster2020.herokuapp.com/api/users/1/${list}/${id}`,
       {
         method: "POST",
         headers: {
