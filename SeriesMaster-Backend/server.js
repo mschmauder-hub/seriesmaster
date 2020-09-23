@@ -3,7 +3,7 @@ const express = require("express");
 
 const app = express();
 const { MongoClient } = require("mongodb");
-const createAuthRouter = require("./routes/authRouter");
+const createAuthRouter = require("./routes/auth");
 const createShowsRouter = require("./routes/shows");
 const createUserRouter = require("./routes/users");
 

@@ -7,15 +7,16 @@ function createAuthRouter(database) {
 
   authRouter.post("/login", async (req, res) => {
     const { email, password } = req.body;
-    const { userId, watchlist, completed } = await collection.findOne({
+    const user = await collection.findOne({
       email: email,
       password: password,
     });
+    const { userId, watchlist, completed } = user;
 
-    if (!userId) {
-      res.status(400).send("Login failed");
-      return;
+    if (!user) {
+      return res.status(400).send("Login failed");
     }
+
     const authToken = jwt.sign(
       { email, userId, watchlist, completed },
       process.env.JWT_SECRET
