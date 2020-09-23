@@ -1,17 +1,20 @@
 const express = require("express");
 const { findShows } = require("../lib/showsDB");
+const jwt = require("jsonwebtoken");
 const { updateWatchlist } = require("../lib/usersDB");
 
 function createUserRouter(database) {
   const router = express.Router();
   const collection = database.collection("users");
 
-  router.get("/", async (req, res) => {
-    const user = await collection.findOne({
-      email: "user@mail.com",
-    });
+  router.use((req, res, next) => {
+    const { authToken } = req.body;
 
-    res.send(user);
+    if (!authToken) {
+      return res.status(401).send("No Access");
+    }
+
+    next();
   });
 
   router.get("/:id/:list", async (req, res) => {
