@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Image } from "react-native";
 import styled from "styled-components/native";
+import { login } from "../api/login";
 import logo from "../assets/logo.png";
 import AppButton from "../components/AppButton";
 import AppInputText from "../components/AppInputText";
@@ -14,6 +15,11 @@ const Container = styled.View`
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  function handleOnPress() {
+    const credentials = { email, password };
+    login(credentials);
+  }
 
   return (
     <Screen>
@@ -37,7 +43,7 @@ const LoginScreen = () => {
           onChange={setPassword}
           secureTextEntry
         />
-        <AppButton title="Login" />
+        <AppButton title="Login" onPress={handleOnPress} />
       </Container>
     </Screen>
   );
