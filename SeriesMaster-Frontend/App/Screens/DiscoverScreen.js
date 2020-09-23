@@ -59,7 +59,7 @@ const DiscoverScreen = ({ navigation }) => {
                 }
               >
                 <CardImage imageSrc={tvShow.imgSrc} />
-                <AppText cardText={tvShow.title} />
+                <AppText>{tvShow.title}</AppText>
               </Card>
             ))}
           </CardsContainer>

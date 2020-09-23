@@ -18,9 +18,9 @@ const Text = styled.Text`
   color: ${colors.dark};
 `;
 
-const AppButton = ({ title }) => {
+const AppButton = ({ title, ...otherProps }) => {
   return (
-    <ButtonContainer>
+    <ButtonContainer {...otherProps}>
       <Text>{title}</Text>
     </ButtonContainer>
   );
