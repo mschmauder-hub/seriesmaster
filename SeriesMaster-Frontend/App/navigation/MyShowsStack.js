@@ -4,10 +4,14 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../config/colors";
 import DetailsScreen from "../Screens/DetailsScreen";
 import MyShowsScreen from "../Screens/MyShowsScreen";
+import { useNavigation } from "@react-navigation/native";
+import SettingsScreen from "../Screens/SettingsScreen";
 
 const Stack = createStackNavigator();
 
 function MyShowsStack() {
+  const navigation = useNavigation();
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -24,6 +28,7 @@ function MyShowsStack() {
             color={colors.primary}
             size={22}
             style={{ marginRight: 10 }}
+            onPress={() => navigation.navigate("Settings")}
           />
         ),
       }}
@@ -34,6 +39,7 @@ function MyShowsStack() {
         component={DetailsScreen}
         options={({ route }) => ({ title: route.params.title })}
       />
+      <Stack.Screen name="Settings" component={SettingsScreen} />
     </Stack.Navigator>
   );
 }

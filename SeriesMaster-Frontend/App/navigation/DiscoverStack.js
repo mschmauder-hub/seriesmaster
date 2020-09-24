@@ -4,6 +4,7 @@ import DiscoverScreen from "../Screens/DiscoverScreen";
 import DetailsScreen from "../Screens/DetailsScreen";
 import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import SettingsScreen from "../Screens/SettingsScreen";
 
 const Stack = createStackNavigator();
 
@@ -34,6 +35,7 @@ function DiscoverStack() {
         component={DetailsScreen}
         options={({ route }) => ({ title: route.params.title })}
       />
+      <Stack.Screen name="Settings" component={SettingsScreen} />
     </Stack.Navigator>
   );
 }
