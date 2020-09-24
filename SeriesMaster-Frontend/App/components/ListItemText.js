@@ -5,7 +5,7 @@ import fonts from "../config/fonts";
 const ListItemText = styled.Text`
   color: ${colors.primary};
   font-size: ${fonts.title};
-  margin-left: 10px;
+  margin-left: 20px;
 `;
 
 export default ListItemText;
