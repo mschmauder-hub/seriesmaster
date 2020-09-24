@@ -13,7 +13,7 @@ const Container = styled.View`
   background: ${colors.dark};
 `;
 
-const StyledView = styled.View`
+const View = styled.View`
   flex-direction: row;
   width: 100%;
 `;
@@ -37,7 +37,7 @@ const MyShowsScreen = ({ navigation }) => {
 
   return (
     <Container>
-      <StyledView>
+      <View>
         <Tab
           title="Watchlist"
           onPress={() => setActiveTab("watchlist")}
@@ -48,7 +48,7 @@ const MyShowsScreen = ({ navigation }) => {
           onPress={() => setActiveTab("completed")}
           isActive={activeTab === "completed"}
         />
-      </StyledView>
+      </View>
 
       {activeTab === "completed" &&
         completed?.map((show) => (
