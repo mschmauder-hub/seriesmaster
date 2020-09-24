@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import TabNavigator from "./App/navigation/TabNavigator";
-import LoginScreen from "./App/Screens/LoginScreen";
 import AuthContext from "./App/auth/context";
 import tokenStorage from "./App/auth/tokenStorage";
+import AuthStack from "./App/navigation/AuthStack";
 
 export default function App() {
   const [user, setUser] = useState();
@@ -19,7 +19,7 @@ export default function App() {
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <NavigationContainer>
-        {user ? <TabNavigator /> : <LoginScreen />}
+        {user ? <TabNavigator /> : <AuthStack />}
       </NavigationContainer>
     </AuthContext.Provider>
   );

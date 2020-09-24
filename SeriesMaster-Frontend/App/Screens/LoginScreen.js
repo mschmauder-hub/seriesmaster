@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Image } from "react-native";
+import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import { login } from "../api/login";
 import logo from "../assets/logo.png";
@@ -8,13 +9,19 @@ import AppInputText from "../components/AppInputText";
 import Screen from "./Screen";
 import AuthContext from "../auth/context";
 import tokenStorage from "../auth/tokenStorage";
+import TouchableText from "../components/TouchableText";
 
 const Container = styled.View`
   justify-content: center;
   flex: 1;
 `;
 
-const LoginScreen = () => {
+const View = styled.View`
+  flex-direction: row;
+  justify-content: space-around;
+`;
+
+const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const authContext = useContext(AuthContext);
@@ -49,6 +56,13 @@ const LoginScreen = () => {
           onChange={setPassword}
           secureTextEntry
         />
+        <View>
+          <TouchableText title="Forgot Password" />
+          <TouchableText
+            title="Sign up"
+            onPress={() => navigation.navigate("Register")}
+          />
+        </View>
         <AppButton title="Login" onPress={handleOnPress} />
       </Container>
     </Screen>
@@ -56,3 +70,7 @@ const LoginScreen = () => {
 };
 
 export default LoginScreen;
+
+LoginScreen.propTypes = {
+  navigation: PropTypes.object,
+};
