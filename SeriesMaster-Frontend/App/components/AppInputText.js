@@ -18,6 +18,7 @@ const InputText = styled.TextInput`
   color: ${colors.dark};
   padding: 10px;
   margin-left: 5px;
+  width: 100%;
 `;
 
 const Icon = styled(MaterialCommunityIcons)`
