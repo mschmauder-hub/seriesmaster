@@ -11,11 +11,10 @@ function createAuthRouter(database) {
       email: email,
       password: password,
     });
-    const { userId, watchlist, completed } = user;
-
     if (!user) {
       return res.status(400).send("Login failed");
     }
+    const { userId, watchlist, completed } = user;
 
     const authToken = jwt.sign(
       { email, userId, watchlist, completed },
