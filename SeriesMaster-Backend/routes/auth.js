@@ -1,5 +1,6 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
+const { v4: uuidv4 } = require("uuid");
 
 function createAuthRouter(database) {
   const authRouter = express.Router();
@@ -22,6 +23,25 @@ function createAuthRouter(database) {
     );
 
     res.json(authToken);
+  });
+  authRouter.post("/register", async (req, res) => {
+    const { email, password } = req.body;
+    const user = await collection.findOne({
+      email: email,
+    });
+    if (user) {
+      return res.status(400).send("E-mail already exists.");
+    }
+
+    const userId = uuidv4();
+
+    await collection.insertOne({
+      email: email,
+      password: password,
+      userId: userId,
+    });
+
+    res.send("Register User");
   });
 
   return authRouter;
