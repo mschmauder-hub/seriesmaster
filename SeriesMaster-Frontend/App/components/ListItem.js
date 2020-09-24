@@ -7,6 +7,7 @@ const ListItem = styled.TouchableOpacity`
   border-bottom-color: ${colors.grey};
   width: 100%;
   border-width: 1px;
+  align-items: center;
 `;
 
 export default ListItem;
