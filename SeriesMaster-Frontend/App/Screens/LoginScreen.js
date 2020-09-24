@@ -6,8 +6,8 @@ import logo from "../assets/logo.png";
 import AppButton from "../components/AppButton";
 import AppInputText from "../components/AppInputText";
 import Screen from "./Screen";
-import jwtDecode from "jwt-decode";
 import AuthContext from "../auth/context";
+import tokenStorage from "../auth/tokenStorage";
 
 const Container = styled.View`
   justify-content: center;
@@ -22,9 +22,8 @@ const LoginScreen = () => {
   async function handleOnPress() {
     const credentials = { email, password };
     const jwtToken = await login(credentials);
-
-    const user = await jwtDecode(jwtToken);
-
+    tokenStorage.storeToken(jwtToken);
+    const user = await tokenStorage.getUser();
     authContext.setUser(user);
   }
 
