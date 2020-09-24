@@ -7,11 +7,15 @@ function createUserRouter(database) {
   const router = express.Router();
   const collection = database.collection("users");
 
-  router.use((req, res, next) => {
-    const { authToken } = req.body;
-
-    if (!authToken) {
+  router.use(async (req, res, next) => {
+    const token = req.header("auth-token");
+    if (!token) {
       return res.status(401).send("No Access");
+    }
+    const { email } = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await collection.findOne({ email });
+    if (!user) {
+      return response.status(401).end("Unauthorized");
     }
 
     next();
