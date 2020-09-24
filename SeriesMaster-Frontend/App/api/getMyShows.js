@@ -1,29 +1,40 @@
+import tokenStorage from "../auth/tokenStorage";
+
 export async function getMyShows(list) {
-  try {
-    const response = await fetch(
-      `https://seriesmaster2020.herokuapp.com/api/users/1/${list}`
-    );
+  const token = await tokenStorage.getToken();
+  const { userId } = await tokenStorage.getUser();
 
-    const data = await response.json();
+  const response = await fetch(
+    `https://seriesmaster2020.herokuapp.com/api/users/${userId}/${list}`,
+    {
+      method: "GET",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        "auth-token": token,
+      }),
+    }
+  );
 
-    return data;
-  } catch (error) {
-    console.log(error);
+  if (!response.ok) {
+    return;
   }
+  const data = await response.json();
+
+  return data;
 }
 
 export async function postMyList(list, id) {
-  try {
-    await fetch(
-      `https://seriesmaster2020.herokuapp.com/api/users/1/${list}/${id}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-  } catch (error) {
-    console.log(error);
-  }
+  const token = await tokenStorage.getToken();
+  const { userId } = await tokenStorage.getUser();
+
+  await fetch(
+    `https://seriesmaster2020.herokuapp.com/api/users/${userId}/${list}/${id}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": token,
+      },
+    }
+  );
 }
