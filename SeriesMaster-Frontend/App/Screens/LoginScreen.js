@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Image } from "react-native";
 import styled from "styled-components/native";
 import { login } from "../api/login";
@@ -6,6 +6,8 @@ import logo from "../assets/logo.png";
 import AppButton from "../components/AppButton";
 import AppInputText from "../components/AppInputText";
 import Screen from "./Screen";
+import jwtDecode from "jwt-decode";
+import AuthContext from "../auth/context";
 
 const Container = styled.View`
   justify-content: center;
@@ -15,10 +17,15 @@ const Container = styled.View`
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const authContext = useContext(AuthContext);
 
-  function handleOnPress() {
+  async function handleOnPress() {
     const credentials = { email, password };
-    login(credentials);
+    const jwtToken = await login(credentials);
+
+    const user = await jwtDecode(jwtToken);
+
+    authContext.setUser(user);
   }
 
   return (
