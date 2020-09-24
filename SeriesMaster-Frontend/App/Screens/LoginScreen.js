@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Image } from "react-native";
+import { Image, Text } from "react-native";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import { login } from "../api/login";
@@ -25,13 +25,23 @@ const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const authContext = useContext(AuthContext);
+  const [loginFailed, setLoginFailed] = useState(false);
 
   async function handleOnPress() {
-    const credentials = { email, password };
-    const jwtToken = await login(credentials);
-    tokenStorage.storeToken(jwtToken);
-    const user = await tokenStorage.getUser();
-    authContext.setUser(user);
+    try {
+      const credentials = { email, password };
+      const jwtToken = await login(credentials);
+
+      if (!jwtToken) {
+        setLoginFailed(true);
+        return;
+      }
+      tokenStorage.storeToken(jwtToken);
+      const user = await tokenStorage.getUser();
+      authContext.setUser(user);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -63,6 +73,11 @@ const LoginScreen = ({ navigation }) => {
             onPress={() => navigation.navigate("Register")}
           />
         </View>
+        {loginFailed && (
+          <Text style={{ color: "red", alignSelf: "center" }}>
+            Login invalid
+          </Text>
+        )}
         <AppButton title="Login" onPress={handleOnPress} />
       </Container>
     </Screen>
