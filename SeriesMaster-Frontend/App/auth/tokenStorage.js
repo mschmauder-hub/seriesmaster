@@ -13,6 +13,9 @@ const storeToken = async (authToken) => {
 
 const getUser = async () => {
   const token = await getToken();
+  if (!token) {
+    return;
+  }
   return await jwtDecode(token);
 };
 
