@@ -14,8 +14,7 @@ import { postMyList } from "../api/getMyShows";
 const Container = styled.View`
   flex: 1;
   align-items: center;
-  background: #20232a;
-  padding-top: 24px;
+  background: ${colors.dark};
 `;
 
 const Main = styled.View`
@@ -62,12 +61,14 @@ const DetailsScreen = ({ route }) => {
           <SummaryText text={tvShow.summary}></SummaryText>
 
           <ToggleButton
-            title="Watchlist"
+            title={onWatchList ? "Remove from Watchlist" : "Add to Watchlist"}
             status={onWatchList}
             onPress={() => handleOnPress("watchlist")}
           />
           <ToggleButton
-            title="Completed"
+            title={
+              completed ? "Remove from Completed list" : "Add to Completed list"
+            }
             status={completed}
             onPress={() => handleOnPress("completed")}
           />

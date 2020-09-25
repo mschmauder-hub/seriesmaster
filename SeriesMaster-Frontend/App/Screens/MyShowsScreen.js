@@ -18,6 +18,10 @@ const View = styled.View`
   width: 100%;
 `;
 
+const ScrollView = styled.ScrollView`
+  width: 100%;
+`;
+
 const MyShowsScreen = ({ navigation }) => {
   const [activeTab, setActiveTab] = useState("watchlist");
   const [watchlist, setWatchlist] = useState([]);
@@ -33,7 +37,7 @@ const MyShowsScreen = ({ navigation }) => {
       setCompleted(shows);
     }
     fetchMyShows();
-  }, [activeTab]);
+  }, [activeTab, watchlist, completed]);
 
   return (
     <Container>
@@ -49,33 +53,34 @@ const MyShowsScreen = ({ navigation }) => {
           isActive={activeTab === "completed"}
         />
       </View>
-
-      {activeTab === "completed" &&
-        completed?.map((show) => (
-          <CompletedList
-            key={show.id}
-            show={show}
-            onPress={() =>
-              navigation.navigate("Details", {
-                title: show.title,
-                id: show.id,
-              })
-            }
-          />
-        ))}
-      {activeTab === "watchlist" &&
-        watchlist?.map((show) => (
-          <Watchlist
-            key={show.id}
-            show={show}
-            onPress={() =>
-              navigation.navigate("Details", {
-                title: show.title,
-                id: show.id,
-              })
-            }
-          />
-        ))}
+      <ScrollView>
+        {activeTab === "completed" &&
+          completed?.map((show) => (
+            <CompletedList
+              key={show.id}
+              show={show}
+              onPress={() =>
+                navigation.navigate("Details", {
+                  title: show.title,
+                  id: show.id,
+                })
+              }
+            />
+          ))}
+        {activeTab === "watchlist" &&
+          watchlist?.map((show) => (
+            <Watchlist
+              key={show.id}
+              show={show}
+              onPress={() =>
+                navigation.navigate("Details", {
+                  title: show.title,
+                  id: show.id,
+                })
+              }
+            />
+          ))}
+      </ScrollView>
     </Container>
   );
 };

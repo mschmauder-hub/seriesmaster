@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Image, Text } from "react-native";
+import { Image } from "react-native";
 import PropTypes from "prop-types";
 import styled from "styled-components/native";
 import { login } from "../api/login";
@@ -19,6 +19,11 @@ const Container = styled.View`
 const View = styled.View`
   flex-direction: row;
   justify-content: space-around;
+`;
+
+const Text = styled.Text`
+  color: red;
+  align-self: center;
 `;
 
 const LoginScreen = ({ navigation }) => {
@@ -73,11 +78,7 @@ const LoginScreen = ({ navigation }) => {
             onPress={() => navigation.navigate("Register")}
           />
         </View>
-        {loginFailed && (
-          <Text style={{ color: "red", alignSelf: "center" }}>
-            Login invalid
-          </Text>
-        )}
+        {loginFailed && <Text>Login invalid</Text>}
         <AppButton title="Login" onPress={handleOnPress} />
       </Container>
     </Screen>

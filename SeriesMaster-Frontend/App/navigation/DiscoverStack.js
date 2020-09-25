@@ -5,10 +5,12 @@ import DetailsScreen from "../Screens/DetailsScreen";
 import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import SettingsScreen from "../Screens/SettingsScreen";
+import { useNavigation } from "@react-navigation/native";
 
 const Stack = createStackNavigator();
 
 function DiscoverStack() {
+  const navigation = useNavigation();
   return (
     <Stack.Navigator
       screenOptions={{
@@ -25,6 +27,7 @@ function DiscoverStack() {
             color={colors.primary}
             size={22}
             style={{ marginRight: 10 }}
+            onPress={() => navigation.navigate("Settings")}
           />
         ),
       }}
