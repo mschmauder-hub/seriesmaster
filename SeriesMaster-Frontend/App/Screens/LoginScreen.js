@@ -21,17 +21,32 @@ const View = styled.View`
   justify-content: space-around;
 `;
 
+const Text = styled.Text`
+  color: red;
+  align-self: center;
+`;
+
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const authContext = useContext(AuthContext);
+  const [loginFailed, setLoginFailed] = useState(false);
 
   async function handleOnPress() {
-    const credentials = { email, password };
-    const jwtToken = await login(credentials);
-    tokenStorage.storeToken(jwtToken);
-    const user = await tokenStorage.getUser();
-    authContext.setUser(user);
+    try {
+      const credentials = { email, password };
+      const jwtToken = await login(credentials);
+
+      if (!jwtToken) {
+        setLoginFailed(true);
+        return;
+      }
+      tokenStorage.storeToken(jwtToken);
+      const user = await tokenStorage.getUser();
+      authContext.setUser(user);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -63,6 +78,7 @@ const LoginScreen = ({ navigation }) => {
             onPress={() => navigation.navigate("Register")}
           />
         </View>
+        {loginFailed && <Text>Login invalid</Text>}
         <AppButton title="Login" onPress={handleOnPress} />
       </Container>
     </Screen>

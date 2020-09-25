@@ -14,7 +14,6 @@ const Container = styled.View`
   flex: 1;
   align-items: center;
   background: #20232a;
-  padding-top: 24px;
 `;
 
 const Main = styled.View`
@@ -23,10 +22,9 @@ const Main = styled.View`
   flex: 1;
 `;
 const CardsContainer = styled.View`
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   justify-content: space-around;
-  margin: 10px;
+  margin: 20px 10px;
 `;
 
 const DiscoverScreen = ({ navigation }) => {

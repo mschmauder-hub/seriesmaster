@@ -9,6 +9,9 @@ export async function login(credentials) {
       body: JSON.stringify(credentials),
     }
   );
+  if (!response.ok) {
+    return;
+  }
 
   const data = await response.json();
 

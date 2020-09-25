@@ -10,7 +10,7 @@ const Watchlist = ({ onPress, show }) => {
     <List>
       <ListItem onPress={onPress}>
         <ListItemImage imageSrc={show.imgSrc} />
-        <ListItemText title={show.title} />
+        <ListItemText>{show.title}</ListItemText>
       </ListItem>
     </List>
   );

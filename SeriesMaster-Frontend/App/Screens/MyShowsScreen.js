@@ -13,8 +13,12 @@ const Container = styled.View`
   background: ${colors.dark};
 `;
 
-const StyledView = styled.View`
+const View = styled.View`
   flex-direction: row;
+  width: 100%;
+`;
+
+const ScrollView = styled.ScrollView`
   width: 100%;
 `;
 
@@ -33,11 +37,11 @@ const MyShowsScreen = ({ navigation }) => {
       setCompleted(shows);
     }
     fetchMyShows();
-  }, [activeTab]);
+  }, [activeTab, watchlist, completed]);
 
   return (
     <Container>
-      <StyledView>
+      <View>
         <Tab
           title="Watchlist"
           onPress={() => setActiveTab("watchlist")}
@@ -48,34 +52,35 @@ const MyShowsScreen = ({ navigation }) => {
           onPress={() => setActiveTab("completed")}
           isActive={activeTab === "completed"}
         />
-      </StyledView>
-
-      {activeTab === "completed" &&
-        completed?.map((show) => (
-          <CompletedList
-            key={show.id}
-            show={show}
-            onPress={() =>
-              navigation.navigate("Details", {
-                title: show.title,
-                id: show.id,
-              })
-            }
-          />
-        ))}
-      {activeTab === "watchlist" &&
-        watchlist?.map((show) => (
-          <Watchlist
-            key={show.id}
-            show={show}
-            onPress={() =>
-              navigation.navigate("Details", {
-                title: show.title,
-                id: show.id,
-              })
-            }
-          />
-        ))}
+      </View>
+      <ScrollView>
+        {activeTab === "completed" &&
+          completed?.map((show) => (
+            <CompletedList
+              key={show.id}
+              show={show}
+              onPress={() =>
+                navigation.navigate("Details", {
+                  title: show.title,
+                  id: show.id,
+                })
+              }
+            />
+          ))}
+        {activeTab === "watchlist" &&
+          watchlist?.map((show) => (
+            <Watchlist
+              key={show.id}
+              show={show}
+              onPress={() =>
+                navigation.navigate("Details", {
+                  title: show.title,
+                  id: show.id,
+                })
+              }
+            />
+          ))}
+      </ScrollView>
     </Container>
   );
 };
