@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ScrollView } from "react-native";
 import styled from "styled-components/native";
 import Tags from "../components/Tags";
@@ -10,6 +10,8 @@ import TitleImage from "../components/TitleImage";
 import PropTypes from "prop-types";
 import { getShow } from "../api/getShows";
 import { postMyList } from "../api/getMyShows";
+import LoadingScreen from "./LoadingScreen";
+import AuthContext from "../auth/context";
 
 const Container = styled.View`
   flex: 1;
@@ -27,24 +29,53 @@ const TagsContainer = styled.View`
   flex-direction: row;
 `;
 
+const ButtonContainer = styled.View`
+  flex-direction: row;
+`;
+
 const DetailsScreen = ({ route }) => {
   const [completed, setCompleted] = useState(false);
   const [onWatchList, setOnWatchList] = useState(false);
   const [tvShow, setTvShow] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { user, setUser } = useContext(AuthContext);
 
   useEffect(() => {
     async function fetchShow() {
+      setLoading(true);
       const show = await getShow(route.params.id);
+      checkStatus();
       setTvShow(show);
+      setLoading(false);
     }
     fetchShow();
   }, [route.params.id]);
 
+  function checkStatus() {
+    const completedListStatus = user.completed.some((item) => {
+      return item == route.params.id;
+    });
+    const watchListStatus = user.watchlist.some((item) => {
+      return item == route.params.id;
+    });
+
+    setOnWatchList(watchListStatus);
+    setCompleted(completedListStatus);
+  }
+
   async function handleOnPress(list) {
-    await postMyList(list, route.params.id);
     list === "watchlist"
       ? setOnWatchList(!onWatchList)
       : setCompleted(!completed);
+
+    const newList = await postMyList(list, route.params.id);
+    let newUser = { ...user };
+    newUser[list] = newList;
+    await setUser(newUser);
+  }
+
+  if (loading) {
+    return <LoadingScreen />;
   }
 
   return (
@@ -59,19 +90,22 @@ const DetailsScreen = ({ route }) => {
           </TagsContainer>
 
           <SummaryText text={tvShow.summary}></SummaryText>
-
-          <ToggleButton
-            title={onWatchList ? "Remove from Watchlist" : "Add to Watchlist"}
-            status={onWatchList}
-            onPress={() => handleOnPress("watchlist")}
-          />
-          <ToggleButton
-            title={
-              completed ? "Remove from Completed list" : "Add to Completed list"
-            }
-            status={completed}
-            onPress={() => handleOnPress("completed")}
-          />
+          <ButtonContainer>
+            <ToggleButton
+              title={onWatchList ? "Remove from Watchlist" : "Add to Watchlist"}
+              status={onWatchList}
+              onPress={() => handleOnPress("watchlist")}
+            />
+            <ToggleButton
+              title={
+                completed
+                  ? "Remove from Completed list"
+                  : "Add to Completed list"
+              }
+              status={completed}
+              onPress={() => handleOnPress("completed")}
+            />
+          </ButtonContainer>
         </Main>
       </ScrollView>
     </Container>

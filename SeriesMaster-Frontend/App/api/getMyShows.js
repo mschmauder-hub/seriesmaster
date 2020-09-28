@@ -27,7 +27,7 @@ export async function postMyList(list, id) {
   const token = await tokenStorage.getToken();
   const { userId } = await tokenStorage.getUser();
 
-  await fetch(
+  const response = await fetch(
     `https://seriesmaster2020.herokuapp.com/api/users/${userId}/${list}/${id}`,
     {
       method: "POST",
@@ -37,4 +37,6 @@ export async function postMyList(list, id) {
       },
     }
   );
+  const data = response.json();
+  return data;
 }

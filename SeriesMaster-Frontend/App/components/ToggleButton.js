@@ -5,11 +5,13 @@ import colors from "../config/colors";
 import fonts from "../config/fonts";
 
 const Container = styled.TouchableOpacity`
+  flex-direction: row;
   background: ${colors.grey};
-  padding: 20px;
+  padding: 20px 20px;
   width: 40%;
-  align-items: center;
   margin: 10px;
+  align-items: center;
+  justify-content: center;
 `;
 
 const ButtonText = styled.Text`

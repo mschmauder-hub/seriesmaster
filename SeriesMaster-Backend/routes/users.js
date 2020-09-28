@@ -41,10 +41,12 @@ function createUserRouter(database) {
       const list = req.params.list;
       const showId = req.params.showId;
 
-      updateWatchlist(id, showId, database, list);
-      res.send("Updated");
+      await updateWatchlist(id, showId, database, list);
+      const user = await collection.findOne({ userId: id });
+
+      res.json(user[list]);
     } catch (error) {
-      response.status(500).send(error.message);
+      res.status(500).send(error.message);
     }
   });
 
