@@ -1,5 +1,6 @@
 const express = require("express");
-const { searchShows, searchSingleShow } = require("../api/getShows");
+const { searchShows, getSingleShow } = require("../api/getShows");
+
 const { postShow, findShow } = require("../lib/showsDB");
 
 function createShowsRouter(database) {
@@ -20,16 +21,16 @@ function createShowsRouter(database) {
     try {
       const id = req.params.id;
       let show;
-      show = await findShow(database, id);
 
+      show = await findShow(database, id);
       if (!show) {
-        show = await searchSingleShow(id);
+        show = await getSingleShow(id);
         postShow(database, show);
       }
 
       res.json(show);
     } catch (error) {
-      response.status(500).send(error.message);
+      res.status(500).send(error.message);
     }
   });
 
