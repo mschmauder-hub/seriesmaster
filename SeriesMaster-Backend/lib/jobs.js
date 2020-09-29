@@ -2,7 +2,7 @@ const CronJob = require("cron").CronJob;
 const { checkApi, checkUpdates } = require("./checkUpdates");
 
 function runUpdateShows(database) {
-  const job = new CronJob("*/1 * * * *", async () => {
+  const job = new CronJob("*/10 * * * *", async () => {
     const shows = await checkApi(database);
 
     const allShows = await Promise.all(
