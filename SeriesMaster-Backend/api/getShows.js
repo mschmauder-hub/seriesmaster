@@ -53,5 +53,4 @@ async function getSingleShow(query) {
     console.log(error);
   }
 }
-exports.searchShows = searchShows;
-exports.getSingleShow = getSingleShow;
+module.exports = { searchShows, getSingleShow };
