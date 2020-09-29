@@ -1,19 +1,17 @@
 import tokenStorage from "../auth/tokenStorage";
+import api from "./api";
 
 export async function getMyShows(list) {
   const token = await tokenStorage.getToken();
   const { userId } = await tokenStorage.getUser();
 
-  const response = await fetch(
-    `https://seriesmaster2020.herokuapp.com/api/users/${userId}/${list}`,
-    {
-      method: "GET",
-      headers: new Headers({
-        "Content-Type": "application/json",
-        "auth-token": token,
-      }),
-    }
-  );
+  const response = await fetch(`${api.server}/api/users/${userId}/${list}`, {
+    method: "GET",
+    headers: new Headers({
+      "Content-Type": "application/json",
+      "auth-token": token,
+    }),
+  });
 
   if (!response.ok) {
     return;
@@ -28,7 +26,7 @@ export async function postMyList(list, id) {
   const { userId } = await tokenStorage.getUser();
 
   const response = await fetch(
-    `https://seriesmaster2020.herokuapp.com/api/users/${userId}/${list}/${id}`,
+    `${api.server}/api/users/${userId}/${list}/${id}`,
     {
       method: "POST",
       headers: {
