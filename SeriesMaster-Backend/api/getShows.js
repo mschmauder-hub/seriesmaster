@@ -29,7 +29,7 @@ async function searchShows(query) {
     console.log(error);
   }
 }
-async function searchSingleShow(query) {
+async function getSingleShow(query) {
   try {
     const response = await fetch(`http://api.tvmaze.com/shows/${query}`);
 
@@ -45,6 +45,7 @@ async function searchSingleShow(query) {
       title: data.name,
       imgSrc: data.image.medium,
       summary: data.summary.replace(/(<([^>]+)>)/gi, ""),
+      lastEpisode: data._links.previousepisode.href,
     };
 
     return tvShow;
@@ -52,5 +53,4 @@ async function searchSingleShow(query) {
     console.log(error);
   }
 }
-exports.searchShows = searchShows;
-exports.searchSingleShow = searchSingleShow;
+module.exports = { searchShows, getSingleShow };
