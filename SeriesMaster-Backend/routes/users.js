@@ -15,7 +15,7 @@ function createUserRouter(database) {
     const { email } = jwt.verify(token, process.env.JWT_SECRET);
     const user = await collection.findOne({ email });
     if (!user) {
-      return response.status(401).end("Unauthorized");
+      return res.status(401).end("Unauthorized");
     }
 
     next();
@@ -31,7 +31,7 @@ function createUserRouter(database) {
       const shows = await findShows(database, user[list]);
       res.json(shows);
     } catch (error) {
-      response.status(500).send(error.message);
+      res.status(500).send(error.message);
     }
   });
 
@@ -47,6 +47,20 @@ function createUserRouter(database) {
       res.json(user[list]);
     } catch (error) {
       res.status(500).send(error.message);
+    }
+  });
+
+  router.post("/pushtoken", async (req, res) => {
+    try {
+      const { id, token } = req.body;
+
+      const data = token.data;
+
+      await collection.updateOne({ userId: id }, { $set: { token: data } });
+
+      res.send("OK");
+    } catch (error) {
+      console.log(error);
     }
   });
 
