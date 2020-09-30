@@ -54,9 +54,11 @@ function createUserRouter(database) {
     try {
       const { id, token } = req.body;
 
-      const data = token.data;
+      if (!token) {
+        return res.send("no Expo token provided");
+      }
 
-      await collection.updateOne({ userId: id }, { $set: { token: data } });
+      await collection.updateOne({ userId: id }, { $set: { token: token } });
 
       res.send("OK");
     } catch (error) {
