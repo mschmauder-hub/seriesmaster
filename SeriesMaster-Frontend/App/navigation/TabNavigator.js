@@ -1,15 +1,18 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
-import React from "react";
+import React, { useEffect } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import colors from "../config/colors";
 import DiscoverStack from "./DiscoverStack";
 import MyShowsStack from "./MyShowsStack";
+import ProfileScreen from "../Screens/ProfileScreen";
 
 const Tab = createBottomTabNavigator();
 
 function TabNavigator() {
+  useEffect(() => {}, []);
+
   return (
     <Tab.Navigator
       tabBarOptions={{
@@ -41,6 +44,15 @@ function TabNavigator() {
               size={size}
               color={color}
             />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          tabBarIcon: ({ size, color }) => (
+            <MaterialCommunityIcons name="account" size={size} color={color} />
           ),
         }}
       />
