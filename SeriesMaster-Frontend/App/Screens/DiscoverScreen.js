@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import { ScrollView } from "react-native";
 import AppInputText from "../components/AppInputText";
@@ -11,14 +11,6 @@ import { getShows } from "../api/getShows";
 import useDebounce from "../hooks/useDebounce";
 import registerForPushNotifications from "../notifications/register";
 import * as Notifications from "expo-notifications";
-
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: false,
-    shouldSetBadge: false,
-  }),
-});
 
 const Container = styled.View`
   flex: 1;
@@ -37,16 +29,23 @@ const CardsContainer = styled.View`
   margin: 20px 10px;
 `;
 
+Notifications.setNotificationHandler({
+  handleNotification: () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
+
 const DiscoverScreen = ({ navigation }) => {
   const [query, setQuery] = useState("");
   const [tvShows, setTvShows] = useState([]);
   const debouncedQuery = useDebounce(query, 500);
-  const responseListener = useRef();
 
   useEffect(() => {
     registerForPushNotifications();
 
-    responseListener.current = Notifications.addNotificationResponseReceivedListener(
+    const responseListener = Notifications.addNotificationResponseReceivedListener(
       () => navigation.navigate("Profile")
     );
 
