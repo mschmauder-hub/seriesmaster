@@ -15,7 +15,7 @@ function createUserRouter(database) {
     const { email } = jwt.verify(token, process.env.JWT_SECRET);
     const user = await collection.findOne({ email });
     if (!user) {
-      return response.status(401).end("Unauthorized");
+      return res.status(401).end("Unauthorized");
     }
 
     next();
@@ -31,7 +31,7 @@ function createUserRouter(database) {
       const shows = await findShows(database, user[list]);
       res.json(shows);
     } catch (error) {
-      response.status(500).send(error.message);
+      res.status(500).send(error.message);
     }
   });
 
@@ -45,6 +45,22 @@ function createUserRouter(database) {
       const user = await collection.findOne({ userId: id });
 
       res.json(user[list]);
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
+  });
+
+  router.post("/pushtoken", async (req, res) => {
+    try {
+      const { id, token } = req.body;
+
+      if (!token) {
+        return res.send("no Expo token provided");
+      }
+
+      await collection.updateOne({ userId: id }, { $set: { token: token } });
+
+      res.send("OK");
     } catch (error) {
       res.status(500).send(error.message);
     }

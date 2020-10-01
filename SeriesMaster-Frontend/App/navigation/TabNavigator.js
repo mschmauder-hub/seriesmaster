@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import colors from "../config/colors";
 import DiscoverStack from "./DiscoverStack";
 import MyShowsStack from "./MyShowsStack";
+import ProfileScreen from "../Screens/ProfileScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -41,6 +42,15 @@ function TabNavigator() {
               size={size}
               color={color}
             />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          tabBarIcon: ({ size, color }) => (
+            <MaterialCommunityIcons name="account" size={size} color={color} />
           ),
         }}
       />
