@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components/native";
 import Tab from "../components/Tab";
 import colors from "../config/colors";
@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import Watchlist from "../components/Watchlist";
 import CompletedList from "../components/CompletedList";
 import { getMyShows } from "../api/getMyShows";
+import AuthContext from "../auth/context";
 
 const Container = styled.View`
   flex: 1;
@@ -26,6 +27,7 @@ const MyShowsScreen = ({ navigation }) => {
   const [activeTab, setActiveTab] = useState("watchlist");
   const [watchlist, setWatchlist] = useState([]);
   const [completed, setCompleted] = useState([]);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     async function fetchMyShows() {
@@ -37,7 +39,7 @@ const MyShowsScreen = ({ navigation }) => {
       setCompleted(shows);
     }
     fetchMyShows();
-  }, [activeTab, watchlist, completed]);
+  }, [activeTab, user]);
 
   return (
     <Container>
@@ -46,11 +48,13 @@ const MyShowsScreen = ({ navigation }) => {
           title="Watchlist"
           onPress={() => setActiveTab("watchlist")}
           isActive={activeTab === "watchlist"}
+          margin="10px 0 0 10px"
         />
         <Tab
           title="Completed"
           onPress={() => setActiveTab("completed")}
           isActive={activeTab === "completed"}
+          margin="10px 10px 0 0"
         />
       </View>
       <ScrollView>
