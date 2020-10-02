@@ -16,20 +16,14 @@ export default function useNotifications(
 ) {
   useEffect(() => {
     registerForPushNotifications();
-    let notificationListener;
-    let responseListener;
 
-    if (notificationReceived) {
-      notificationListener = Notifications.addNotificationReceivedListener(
-        notificationReceived
-      );
-    }
+    const notificationListener = Notifications.addNotificationReceivedListener(
+      notificationReceived
+    );
 
-    if (responseReceived) {
-      responseListener = Notifications.addNotificationResponseReceivedListener(
-        responseReceived
-      );
-    }
+    const responseListener = Notifications.addNotificationResponseReceivedListener(
+      responseReceived
+    );
 
     return () => {
       Notifications.removeNotificationSubscription(responseListener);

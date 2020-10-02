@@ -27,7 +27,6 @@ const RegisterScreen = () => {
     const result = await register(credentials);
 
     if (!result) {
-      console.log(result);
       setFailed(true);
       return;
     }
