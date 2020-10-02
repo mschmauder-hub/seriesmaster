@@ -9,14 +9,7 @@ import CardImage from "../components/CardImage";
 import PropTypes from "prop-types";
 import { getShows } from "../api/getShows";
 import useDebounce from "../hooks/useDebounce";
-import registerForPushNotifications from "../notifications/register";
-import * as Notifications from "expo-notifications";
-
-const Container = styled.View`
-  flex: 1;
-  align-items: center;
-  background: #20232a;
-`;
+import { useNotifications } from "../hooks/useNotifications";
 
 const Main = styled.View`
   background: ${colors.dark};
@@ -29,61 +22,42 @@ const CardsContainer = styled.View`
   margin: 20px 10px;
 `;
 
-Notifications.setNotificationHandler({
-  handleNotification: () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: false,
-    shouldSetBadge: false,
-  }),
-});
-
 const DiscoverScreen = ({ navigation }) => {
   const [query, setQuery] = useState("");
   const [tvShows, setTvShows] = useState([]);
   const debouncedQuery = useDebounce(query, 500);
+  useNotifications(null, () => navigation.navigate("MyShows"));
 
   useEffect(() => {
-    registerForPushNotifications();
-
-    const responseListener = Notifications.addNotificationResponseReceivedListener(
-      () => navigation.navigate("Profile")
-    );
-
     fetchShows();
     async function fetchShows() {
       const shows = await getShows(debouncedQuery);
       setTvShows(shows);
     }
-
-    return () => {
-      Notifications.removeNotificationSubscription(responseListener);
-    };
   }, [debouncedQuery]);
 
   return (
-    <Container>
-      <Main>
-        <AppInputText placeholder="Search" input={query} onChange={setQuery} />
-        <ScrollView>
-          <CardsContainer>
-            {tvShows?.map((tvShow) => (
-              <Card
-                key={tvShow.id}
-                onPress={() =>
-                  navigation.navigate("Details", {
-                    title: tvShow.title,
-                    id: tvShow.id,
-                  })
-                }
-              >
-                <CardImage imageSrc={tvShow.imgSrc} />
-                <AppText>{tvShow.title}</AppText>
-              </Card>
-            ))}
-          </CardsContainer>
-        </ScrollView>
-      </Main>
-    </Container>
+    <Main>
+      <AppInputText placeholder="Search" input={query} onChange={setQuery} />
+      <ScrollView>
+        <CardsContainer>
+          {tvShows?.map((tvShow) => (
+            <Card
+              key={tvShow.id}
+              onPress={() =>
+                navigation.navigate("Details", {
+                  title: tvShow.title,
+                  id: tvShow.id,
+                })
+              }
+            >
+              <CardImage imageSrc={tvShow.imgSrc} />
+              <AppText>{tvShow.title}</AppText>
+            </Card>
+          ))}
+        </CardsContainer>
+      </ScrollView>
+    </Main>
   );
 };
 
