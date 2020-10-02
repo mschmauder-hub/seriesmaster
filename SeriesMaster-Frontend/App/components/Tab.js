@@ -12,17 +12,17 @@ const View = styled.View`
   border-top-right-radius: 20px;
   flex: 1;
   align-items: center;
-  margin-top: 10px;
+  margin: ${(props) => props.setMargin};
 `;
 
 const Text = styled.Text`
   color: ${(props) => (props.isActive ? colors.primary : colors.grey)};
 `;
 
-const Tab = ({ onPress, title, isActive }) => {
+const Tab = ({ onPress, title, isActive, margin }) => {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
-      <View isActive={isActive}>
+      <View isActive={isActive} setMargin={margin}>
         <Text isActive={isActive}>{title}</Text>
       </View>
     </TouchableWithoutFeedback>
@@ -35,4 +35,5 @@ Tab.propTypes = {
   onPress: PropTypes.func,
   title: PropTypes.string,
   isActive: PropTypes.bool,
+  margin: PropTypes.string,
 };
