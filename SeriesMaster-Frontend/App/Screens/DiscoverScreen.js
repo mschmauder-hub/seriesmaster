@@ -9,7 +9,7 @@ import CardImage from "../components/CardImage";
 import PropTypes from "prop-types";
 import { getShows } from "../api/getShows";
 import useDebounce from "../hooks/useDebounce";
-import { useNotifications } from "../hooks/useNotifications";
+import useNotifications from "../hooks/useNotifications";
 
 const Main = styled.View`
   background: ${colors.dark};

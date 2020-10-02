@@ -10,7 +10,10 @@ Notifications.setNotificationHandler({
   }),
 });
 
-export function useNotifications(notificationReceived, responseReceived) {
+export default function useNotifications(
+  notificationReceived,
+  responseReceived
+) {
   useEffect(() => {
     registerForPushNotifications();
     let notificationListener;
